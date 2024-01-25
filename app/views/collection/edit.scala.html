@@ -1,0 +1,24 @@
+@import models.masterTransaction.CollectionDraft
+@import views.collection.companion.Edit
+@import views.html.base.form._
+@import views.html.base.modal._
+
+@(editForm: Form[Edit.Data] = Edit.form, collectionDraft: CollectionDraft)(implicit requestHeader: RequestHeader, messagesProvider: MessagesProvider)
+
+@commonForm(constants.Form.EDIT_COLLECTION, editForm, submitDisable = false) {
+    @multiStepNavigator(Seq(Messages(constants.View.COLLECTION_STEPPER_BASIC_INFORMATION), Messages(constants.View.COLLECTION_STEPPER_IMAGE_UPLOAD), Messages(constants.View.COLLECTION_STEPPER_CAPABILITIES), Messages(constants.View.COLLECTION_STEPPER_PROPERTIES)))
+    @commonInputText(editForm, constants.FormField.COLLECTION_ID, Symbol("value") -> collectionDraft.id, Symbol("readonly") -> "readonly", Symbol("containerDivClass") -> "hidden")
+    @commonInputText(editForm, constants.FormField.COLLECTION_NAME, Symbol("value") -> collectionDraft.name)
+    @commonDescriptionText(editForm, constants.FormField.COLLECTION_DESCRIPTION, Symbol("value") -> collectionDraft.detail.description)
+    @commonInputText(editForm, constants.FormField.ADDRESS, Symbol("value") -> collectionDraft.detail.address)
+    @commonInputText(editForm, constants.FormField.POSTAL_CODE, Symbol("value") -> collectionDraft.detail.postalCode)
+    @commonInputText(editForm, constants.FormField.CITY, Symbol("value") -> collectionDraft.city)
+    @commonInputText(editForm, constants.FormField.CONTACT_NUMBER, Symbol("value") -> collectionDraft.detail.contactNumber)
+    @commonSelect(editForm, constants.FormField.CATEGORY, Symbol("value") -> collectionDraft.category)
+    @commonInputEpochTIme(editForm, constants.FormField.EVENT_START_EPOCH, setCurrentTime = false)
+    @commonInputEpochTIme(editForm, constants.FormField.EVENT_END_EPOCH, setCurrentTime = false)
+    @commonInputBigDecimal(editForm, constants.FormField.COLLECTION_ROYALTY, Symbol("value") -> (collectionDraft.royalty * 100))
+    @commonInputURL(editForm, constants.FormField.COLLECTION_WEBSITE, Symbol("required") -> false, Symbol("value") -> collectionDraft.getWebsite.getOrElse(""))
+    @commonInputText(editForm, constants.FormField.COLLECTION_TWITTER, Symbol("required") -> false, Symbol("value") -> collectionDraft.getTwitter.getOrElse(""))
+    @commonInputText(editForm, constants.FormField.COLLECTION_INSTAGRAM, Symbol("required") -> false, Symbol("value") -> collectionDraft.getInstagram.getOrElse(""))
+}

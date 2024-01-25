@@ -1,0 +1,802 @@
+.profileContainer {
+    padding-bottom: 100px;
+}
+
+.item {
+    height: fit-content;
+}
+.item + .item {
+    margin-left: 2%;
+}
+.item-sticky{
+    position: -webkit-sticky;
+    position: sticky;
+    top: 100px;
+    display: flex;
+    flex-direction: column;
+    gap: 24px;
+    z-index: 1;
+}
+.nftContainer{
+    width: 100%;
+    height: fit-content;
+    background-color: var(--card-color);
+    border-radius: 20px;
+    overflow: hidden;
+    margin-bottom: 100px;
+}
+@media (max-width: 768px){
+    .nftContainer{
+        margin-bottom: 0px;
+    }
+}
+profileContainer .item-sticky .profile-card{
+    height: fit-content;
+    background-color: var(--card-color);
+    border-radius: 20px;
+    padding: 16px;
+}
+.item-center .profile-card{
+    padding: 20px 20px 40px 20px;
+}
+.item-center.nftContainer .profile-card{
+    padding: 0px;
+    padding-bottom: 40px;
+}
+/* Creator Profile Card */
+.profile-card{
+    background-color: var(--card-color);
+}
+.profile-card .user-profile-top{
+    display: flex;
+    align-items: center;
+    gap: 12px;
+}
+.profile-card .user-profile-top .user-profile-pic{
+    height: 40px;
+    width: 40px;
+    aspect-ratio: 1;
+    background-color: var(--dark);
+    border-radius: 50%;
+}
+.profile-card .user-profile-name{
+    font-family: var(--font-type-2);
+    font-style: normal;
+    font-weight: 600;
+    font-size: 16px;
+    color: var(--mantle-off-white);
+    line-height: 19px;
+    text-transform: capitalize;
+}
+.profile-card .user-address-box{
+    background-color: var(--card-dark);
+    margin-top:20px;
+    padding: 8px !important;
+    align-items: center;
+    border-radius: 8px;
+    margin-left: 0px !important;
+    margin-right: 0px !important;
+}
+.profile-card .user-address-box .user-address-data{
+    font-family: var(--font-type-2);
+    font-style: normal;
+    font-weight: 400;
+    font-size: 12px;
+    color: var(--mantle-off-white);
+}
+.profile-card .user-address-box .copy-icon{
+    padding: 4px 0 0 0;
+    cursor: pointer;
+}
+.profile-card .user-join-date{
+    font-family: var(--font-type-2);
+    font-style: normal;
+    font-weight: 400;
+    font-size: 12px;
+    color: var(--disable);
+    margin-top: 16px;
+}
+.profile-card .user-profile-data{
+    font-family: var(--font-type-2);
+    font-style: normal;
+    font-weight: 400;
+    font-size: 12px;
+    line-height: 14px;
+    color: var(--inactive-gray);
+    margin-top: 16px;
+}
+.profile-card .separator{
+    height: 2px;
+    width: calc(100% + 32px);
+    background-color: #383838;
+    margin-left: -16px;
+    margin-top: 16px;
+    margin-bottom: 16px;
+}
+.profile-card .user-profile-social ul{
+    list-style: none;
+    display: flex;
+    gap: 16px;
+    margin: 0px;
+}
+.profile-card .profile-icon{
+    height: 22px;
+    width: 22px;
+}
+
+/* Profile Stats Card */
+.profile-card .profile-stats ul{
+    list-style: none;
+    display: flex;
+    flex-direction: column;
+    gap:16px;
+}
+.profile-card .profile-stats ul li{
+    background-color: var(--card-dark);
+    padding: 16px;
+    padding-bottom: 26px;
+    border-radius: 10px;
+}
+.profile-card .profile-stats .stats-card .stats-title{
+    font-family: var(--font-type-2);
+    font-style: normal;
+    font-weight: 400;
+    font-size: 12px;
+    line-height: 14px;
+    color: var(--gray);
+}
+.profile-card .profile-stats .stats-card .stats-number{
+    font-family: var(--font-type-1);
+    font-style: normal;
+    font-weight: 500;
+    font-size: 28px;
+    line-height: 34px;
+    letter-spacing: 0.08em;
+    text-transform: capitalize;
+    color: var(--mantle-off-white);
+    margin-top: 8px;
+}
+
+/* Profile Activity Card */
+.profile-card .activity-top .title{
+    font-family: var(--font-type-2);
+    font-style: normal;
+    font-weight: 700;
+    font-size: 12px;
+    line-height: 14px;
+    text-transform: capitalize;
+    color: var(--mantle-off-white);
+}
+.profile-card .activity-thumbnail{
+    height: 28px;
+    width: 28px;
+    border-radius: 8px;
+}
+.profile-card .notification-message{
+    font-family: var(--font-type-2);
+    font-style: normal;
+    font-weight: 400;
+    font-size: 12px;
+    line-height: 14px;
+    color: var(--text-medium);
+    margin-right: 5px;
+}
+.profile-card .notification-container{
+    max-height: 160px;
+    height: 100%;
+    overflow-y: auto;
+    margin-right: -10px;
+    padding-right: 6px;
+}
+.profile-card .notification-container div:first-child{
+    margin: 0px !important;
+}
+
+/* Profiles Card */
+.profile-card .profiles-container .card-header .left-option {
+    list-style: none;
+    font-family: var(--font-type-1);
+    font-style: normal;
+    font-weight: 400;
+    font-size: 14px;
+    line-height: 17px;
+    text-transform: capitalize;
+    color: var(--gray);
+}
+.profile-card .profiles-container .card-header .left-option .row .col{
+    cursor: pointer;
+}
+.profile-card .profiles-container .card-header .left-option .active{
+    font-weight: 700;
+    color: var(--default);
+}
+.profile-card .profiles-container .card-header .right-option{
+    margin-right: 20px;
+}
+.profile-card .profiles-container .card-header .right-option .right-option-header{
+    display: flex;
+    gap: 24px;
+}
+.profile-card .profiles-container .card-header .right-option .option-layout{
+    display: flex;
+}
+.profile-card .profiles-container .card-header .right-option .option-layout .option{
+    padding: 7px;
+    border: 2px solid var(--line);
+    cursor: pointer;
+}
+.profile-card .profiles-container .card-header .right-option .option-layout .option:hover{
+    background-color: var(--dark);
+}
+.profile-card .profiles-container .card-header .right-option .option-layout .option:hover i{
+    color: var(--popup-bg);
+}
+.profile-card .profiles-container .card-header .right-option .option-layout .option:first-child{
+    border-top-left-radius: 5px;
+    border-bottom-left-radius: 5px;
+}
+.profile-card .profiles-container .card-header .right-option .option-layout .option:last-child{
+    border-top-right-radius: 5px;
+    border-bottom-right-radius: 5px;
+}
+.profile-card .profiles-container .card-header .right-option .option-layout .option:not(:first-child){
+    border-left: none;
+}
+.profile-card .profiles-container .card-header .right-option .option-layout div{
+    background-size: 22px 22px;
+    margin: 0px;
+    padding: 0px;
+    color: var(--dark);
+    font-size: 16px;
+}
+.profile-card .profiles-container .card-header .right-option .option-layout .active{
+    background-color: var(--dark);
+}
+.profile-card .profiles-container .card-header .right-option .option-layout .grid-view-button .grid-icon{
+    background-image: url("../images/icon/gridView.png");
+}
+.profile-card .profiles-container .card-header .right-option .option-layout .grid-view-button:hover .grid-icon,
+.profile-card .profiles-container .card-header .right-option .option-layout .grid-view-button.active .grid-icon
+{
+    background-image: url("../images/icon/gridViewFill.png");
+}
+.profile-card .profiles-container .card-header .right-option .option-layout .list-view-button .list-icon{
+    background-image: url("../images/icon/listView.png");
+}
+.profile-card .profiles-container .card-header .right-option .option-layout .list-view-button:hover .list-icon,
+.profile-card .profiles-container .card-header .right-option .option-layout .list-view-button.active .list-icon
+{
+    background-image: url("../images/icon/listViewFill.png");
+}
+.profile-card .profiles-container .card-header .right-option .option-with-icon{
+    display: flex;
+    gap: 8px;
+    align-items: center;
+    font-family: var(--font-type-2);
+    font-style: normal;
+    font-weight: 700;
+    font-size: 14px;
+    line-height: 17px;
+    text-transform: capitalize;
+    color: var(--mantle-off-white);
+}
+.profile-card .profiles-container .profile-list{
+    /*margin-top: 20px;*/
+}
+
+
+.collectionsPerPage.grid-view-filter{
+    width: 100%;
+}
+.collectionsPerPage.grid-view-filter .collectionPage{
+    display: flex;
+    flex-flow: row wrap;
+}
+.collectionsPerPage.grid-view-filter .collectionPage:nth-child(n+2){
+    margin-top: 16px;
+}
+.collectionsPerPage.grid-view-filter .collectionPage .singleCollection{
+    width: calc(calc(100% - 16px) / 2);
+    background-color: var(--card-dark);
+    border-radius: 10px;
+    margin-top: 16px;
+    transition: 0.3s;
+    overflow: hidden;
+    text-align: center;
+}
+.profile-card .profiles-container .profile-list .list.grid-view-filter li:nth-child(-n + 2) {
+    margin-top: 0px;
+}
+.collectionsPerPage.grid-view-filter .collectionPage .singleCollection:nth-child(-n + 2){
+    margin-top: 0px;
+}
+.profile-card .profiles-container .profile-list .list.grid-view-filter li:nth-child(even){
+    margin-left: 24px;
+}
+.collectionsPerPage.grid-view-filter .collectionPage .singleCollection:nth-child(even){
+    margin-left: 16px;
+}
+.profile-card .profiles-container .profile-list .list-view-filter{
+    display: none;
+    background-color: var(--card-dark);
+}
+
+/* Single Profile Card */
+.single-profile-card #container {
+    width: 400px;
+    margin: 30px auto 0 auto;
+    border-radius: 10px;
+    overflow: hidden;
+}
+.single-profile-card .hero-img{
+    position: relative;
+    height: 150px;
+    overflow: hidden;
+}
+.single-profile-card .hero-img img{
+    width: 100%;
+    display: block;
+    max-height: 150px;
+    height: 100%;
+    margin: auto;
+    position: absolute;
+    top:50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    transition: all 0.5s ease-in-out;
+}
+.single-profile-card:hover .hero-img img{
+    transform: translate(-50%, -50%) scale(1.15);
+}
+@media (max-width: 992px){
+    .single-profile-card .hero-img{
+        height: 120px;
+    }
+    .single-profile-card .hero-img img{
+        max-height: 120px;
+    }
+}
+.profile-card .profiles-container .profile-list .list.slab-view-filter li .single-profile-card .hero-img{
+    flex-grow: 1;
+}
+.profile-card .profiles-container .profile-list .list.slab-view-filter li .single-profile-card .hero-img img{
+    height: 100% !important;
+}
+.single-profile-card .profile-img {
+    background-color: var(--card-dark);
+    width: 50px;
+    height: 50px;
+    margin: -25px auto 0 18px;
+    border-radius: 50%;
+    position: relative;
+    z-index: 99;
+    overflow: hidden;
+}
+.single-profile-card .profile-img img {
+    width: 50px;
+    height: 50px;
+    object-fit: cover;
+    border-radius: 50%;
+}
+.single-profile-card #content {
+    text-align: center;
+    margin: 0 auto;
+}
+.single-profile-card #content h1 {
+    font-family: var(--font-type-2);
+    font-style: normal;
+    font-weight: 700;
+    font-size: 14px;
+    line-height: 17px;
+    text-transform: capitalize;
+    color: var(--default);
+    padding: 8px 0px;
+}
+.single-profile-card #content a p{
+    font-family: var(--font-type-1);
+    font-style: normal;
+    font-weight: 500;
+    font-size: 12px;
+    line-height: 14px;
+    color: var(--gray);
+    padding: 0px 0px 24px 0px;
+    text-align: left;
+}
+
+
+/* Responsive */
+@media (min-width: 1500px) {
+    .collectionsPerPage.grid-view-filter .collectionPage{
+        display: flex;
+        flex-flow: row wrap;
+        gap: 0px 16px;
+    }
+    .collectionsPerPage.grid-view-filter .collectionPage .singleCollection {
+        width: calc(calc(100% - 32px) / 3);
+        background-color: var(--card-dark);
+        border-radius: 10px;
+        margin-top: 16px;
+        transition: 0.3s;
+        overflow: hidden;
+        text-align: center;
+    }
+    .profile-card .profiles-container .profile-list .list.grid-view-filter li:nth-child(-n + 2) {
+        margin-top: 0px;
+    }
+    .collectionsPerPage.grid-view-filter .collectionPage .singleCollection:nth-child(-n + 2){
+        margin-top: 0px;
+    }
+    .profile-card .profiles-container .profile-list .list.grid-view-filter li:nth-child(even){
+        margin-left: 0px;
+    }
+    .collectionsPerPage.grid-view-filter .collectionPage .singleCollection:nth-child(even){
+        margin-left: 0px;
+    }
+}
+@media (max-width: 1200px){
+    .profile-card .profiles-container .card-header{
+        flex-direction: column;
+        gap: 10px;
+    }
+    .profile-card .profiles-container .card-header .right-option{
+        margin-right: 0px;
+    }
+    .profile-card .profiles-container .profile-list .list.grid-view-filter{
+        flex-direction: column;
+    }
+    .collectionsPerPage.grid-view-filter .collectionPage {
+        flex-direction: column;
+    }
+    .profile-card .profiles-container .profile-list .list.grid-view-filter li{
+        width: 100%;
+    }
+    .collectionsPerPage.grid-view-filter .collectionPage .singleCollection{
+        width: 100%;
+    }
+    .profile-card .profiles-container .profile-list .list.grid-view-filter li:nth-child(2){
+        margin-top: 10px;
+    }
+    .collectionsPerPage.grid-view-filter .collectionPage .singleCollection:nth-child(2){
+        margin-top: 16px;
+    }
+    .profile-card .profiles-container .profile-list .list.grid-view-filter li:nth-child(even){
+        margin-left: 0px;
+    }
+    .collectionsPerPage.grid-view-filter .collectionPage .singleCollection:nth-child(even){
+        margin-left: 0px;
+    }
+}
+@media (max-width: 1250px){
+    .profileContainer {
+        margin: 0 20px;
+    }
+}
+@media (max-width: 1024px){
+    .profileContainer {
+        margin: 0 20px;
+    }
+    .profile-card .profiles-container .card-header .left-option ul{
+        gap: 12px;
+    }
+    .profile-card .profiles-container .card-header .right-option .right-option-header{
+        gap: 12px;
+    }
+    .profile-card .profiles-container .card-header .right-option .option-with-icon{
+        gap: 4px;
+    }
+}
+@media (max-width: 800px) {
+    .profileContainer {
+        flex-direction: column;
+        margin: 0px 30px;
+    }
+    .item .profile-card{
+        width: 100%;
+    }
+    .item {
+        width: 100%;
+    }
+    .item + .item {
+        margin-left: 0%;
+    }
+}
+@media (max-width: 426px) {
+
+}
+
+
+
+/* Bootstrap */
+.nftContainer .row [class^="col-"]{
+    padding:0px 8px;
+}
+/* NFT Card */
+.nft-list-container{
+    margin:0px 8px;
+}
+.nft-list-container .row .col:first-child{
+    padding-left: 0px;
+}
+.nft-list-container .row .col:last-child{
+    padding-right: 0px;
+}
+.nft-list .card{
+    background-color: var(--card-dark);
+    overflow: hidden;
+    border-radius: 10px;
+}
+.nft-list .card .card-img{
+    overflow: hidden;
+    width: 100%;
+}
+.nft-list .card .card-img img{
+    display: block;
+    max-width: 100%;
+    max-height: 100%;
+    min-width: 100%;
+    min-height: 100%;
+    margin: auto;
+    object-fit: contain;
+    aspect-ratio: 1/1;
+    transition: all .5s ease-in-out;
+}
+.nft-list .card:hover .card-img:not(.staticImage) img{
+    transform: scale(1.15);
+}
+@media (min-width: 1200px) {
+    .nft-list .card .card-img img{
+        height: 250px;
+    }
+}
+@media (max-width: 1200px) {
+    .nft-list .card .card-img img{
+        height: 200px;
+    }
+}
+.nft-list .card .nft-separator{
+    height: 2px;
+    width: calc(100% + 32px);
+    background-color: var(--popup-bg);
+    margin-left: -16px;
+    margin-top: 16px;
+    margin-bottom: 16px;
+}
+.nft-list .card .nft-name{
+    font-family: var(--font-type-2);
+    font-style: normal;
+    font-weight: 700;
+    font-size: 14px;
+    text-transform: capitalize;
+    color: var(--gray);
+    line-height: 17px;
+}
+.nft-list .card .creator-collection-name{
+    font-family: var(--font-type-1);
+    font-style: normal;
+    font-weight: 500;
+    font-size: 12px;
+    color: var(--default);
+}
+.nft-list .card .nft-mantle-price{
+    font-family: var(--font-type-2);
+    font-style: normal;
+    font-weight: 600;
+    font-size: 18px;
+    color: var(--default);
+    margin-left: 4px;
+}
+.nft-list .card .nft-dollar-price{
+    font-family: var(--font-type-2);
+    font-style: normal;
+    font-weight: 500;
+    font-size: 12px;
+    color: var(--disable);
+}
+.nft-list .card .nft-likes{
+    font-family: var(--font-type-2);
+    font-style: normal;
+    font-weight: 400;
+    font-size: 12px;
+    color: var(--gray);
+}
+.nft-list .card .buy-now-btn{
+    font-family: var(--font-type-2);
+    font-style: normal;
+    font-weight: 600;
+    font-size: 16px;
+    line-height: 19px;
+    text-align: right;
+    text-transform: capitalize;
+    color: var(--disable);
+}
+.nft-list .header-with-icon .back-button-icon img{
+    cursor: pointer;
+    vertical-align: unset !important;
+}
+.nft-list .header-with-icon .collection-link{
+    font-family: var(--font-type-1);
+    font-style: normal;
+    font-weight: 600;
+    font-size: 20px;
+    line-height: 0px !important;
+    text-transform: capitalize;
+    color: var(--gray);
+}
+.nft-list .form-top{
+    display: flex;
+    align-items: center;
+}
+.nft-bottom{
+    margin: 24px 16px;
+}
+.nft-bottom .setting{
+    position: relative;
+    margin-left: 16px;
+}
+.nft-bottom .dot,
+.nft-bottom .dot:before,
+.nft-bottom .dot:after {
+    position: absolute;
+    width: 5px;
+    height: 5px;
+    border-radius: 5px;
+    background-color: var(--gray);
+}
+
+.nft-bottom .dot {
+    top: 50%;
+    left: 50%;
+}
+.nft-bottom .dot:before,
+.nft-bottom .dot:after {
+    content: "";
+}
+.nft-bottom .dot:before {
+    right: 10px;
+}
+.nft-bottom .dot:after {
+    left: 10px;
+}
+.nftContainer .profileCover{
+    position: relative;
+    height: 300px;
+    overflow: hidden;
+    display: block;
+    background-color: var(--popup-bg);
+}
+.nftContainer .profileCover img{
+    display: block;
+    max-width: 918px;
+    max-height: 300px;
+    width: 100%;
+    height: 100%;
+    position: absolute;
+    top:50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+}
+@media (min-width: 1500px){
+    .nftContainer .profileCover{
+        height: 400px;
+    }
+    .nftContainer .profileCover img {
+        display: block;
+        max-width: 1240px;
+        max-height: 400px;
+    }
+}
+@media (max-width: 1400px){
+    .nftContainer .profileCover{
+        height: 250px;
+    }
+}
+@media (max-width: 1200px){
+    .nftContainer .profileCover{
+        height: 200px;
+    }
+}
+@media (max-width: 992px){
+    .nftContainer .profileCover{
+        height: 150px;
+    }
+}
+.profileCoverContainer{
+    background-color: var(--card-dark);
+}
+.profileCoverContainer::after {
+    content: '';
+    position: absolute;
+    left: 0; top: 0;
+    width: 100%; height: 100%;
+    background: -moz-linear-gradient(bottom, rgba(0,0,0,0) 0%, rgba(44, 44, 44, 0.70) 100%);
+    background: -webkit-gradient(linear, left bottom, left bottom, color-stop(0%,rgba(0,0,0,0.65)), color-stop(100%,rgba(0,0,0,0)));
+    background: -webkit-linear-gradient(top, rgba(0,0,0,0) 0%,rgba(44, 44, 44, 0.70) 100%);
+    background: -o-linear-gradient(bottom, rgba(0,0,0,0) 0%,rgba(44, 44, 44, 0.70) 100%);
+    background: -ms-linear-gradient(bottom, rgba(0,0,0,0) 0%,rgba(44, 44, 44, 0.70) 100%);
+    background: linear-gradient(to bottom, rgba(0,0,0,0) 0%,rgba(44, 44, 44, 0.70) 100%);
+}
+.profileCoverContainer .editCollectionCover{
+    position: absolute;
+    bottom: 12px;
+    right: 12px;
+    z-index: 99;
+    cursor: pointer;
+    opacity: 0.5;
+}
+.profileCoverContainer .editCollectionCover:hover{
+    opacity: 1;
+}
+
+/* Create New Collection Card */
+.createCollectionContainer{
+    height: 246px;
+    cursor: pointer;
+    position: relative;
+}
+.createCollectionBadge img{
+    width: 66px;
+    position: absolute;
+    top: 20px;
+    left: 0px;
+}
+.createCollectionContainer .createCollectionIcon{
+    width: 100px;
+}
+.createCollectionContainer .createCollectionLabel{
+    font-family: var(--font-type-2);
+    font-style: normal;
+    font-weight: 700;
+    font-size: 14px;
+    line-height: 17px;
+    text-transform: capitalize;
+    color: var(--gray);
+    margin-top: 16px;
+}
+.createCollectionContainer .createCollectionButton{
+    font-family: var(--font-type-2);
+    font-style: normal;
+    font-weight: 700;
+    font-size: 14px;
+    line-height: 17px;
+    text-transform: capitalize;
+    color: var(--default);
+    border-top: 2px solid var(--popup-bg);
+    padding: 15px 0px;
+}
+@media (max-width: 992px) {
+    .createCollectionContainer{
+        height: 216px;
+    }
+}
+.createNFTCard .createNFTBadge img{
+    width: 66px;
+    position: absolute;
+    top: 20px;
+    left: 0px;
+}
+.createNFTCard .card-img{
+    overflow: unset !important;
+}
+.createNFTCard .card-img img{
+    width: 94px !important;
+    height: 68px !important;
+    margin-right: -12px !important;
+}
+.createNFTCard .card-img .label{
+    font-family: var(--font-type-2);
+    font-style: normal;
+    font-weight: 700;
+    font-size: 14px;
+    line-height: 17px;
+    text-transform: capitalize;
+    color: var(--gray);
+}
+.createNFTCard .createNFTCardDetail .label{
+    font-family: var(--font-type-2);
+    font-style: normal;
+    font-weight: 700;
+    font-size: 14px;
+    line-height: 17px;
+    text-transform: capitalize;
+    color: var(--default);
+}

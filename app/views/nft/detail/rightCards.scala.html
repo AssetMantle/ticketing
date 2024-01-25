@@ -1,0 +1,51 @@
+@import controllers.actions.LoginState
+@import models.analytics.NFTAnalysis
+@import models.master.{Collection, NFT, NFTOwner, PublicListing, Sale, SecondaryMarket}
+@import views.html.base.buttons._
+
+@(collection: Collection, nftAnalysis: NFTAnalysis, nft: NFT, userNFTOwner: Option[NFTOwner], totalOwners: Int)(implicit requestHeader: RequestHeader, messagesProvider: MessagesProvider, optionalLoginState: Option[LoginState])
+
+<div class="d-flex flex-column gap-3 sticky-top item-sticky">
+    <div class="sticky-top item-sticky">
+        <div class="card rightInfoCard">
+            <div class="d-flex flex-column gap-1 mt-2">
+                <div class="analysisTitle">@Messages(constants.View.TOTAL_SUPPLY)</div>
+                <div class="analysisValue">@nft.totalSupply</div>
+            </div>
+            <div class="d-flex flex-column gap-1 mt-2">
+                <div class="analysisTitle">@Messages(constants.View.COLLECTION_ROYALTY_FEES)</div>
+                <div class="analysisValue">@(collection.royalty * 100) %</div>
+            </div>
+            <div class="d-flex flex-column gap-1 mt-2">
+                <div class="analysisTitle">@Messages(constants.View.TOTAL_OWNERS)</div>
+                <div class="analysisValue">@totalOwners</div>
+            </div>
+            @if(userNFTOwner.isDefined && optionalLoginState.get.username == userNFTOwner.get.ownerId) {
+                <div class="d-flex flex-column gap-1 mt-2">
+                    <div class="analysisTitle">@Messages(constants.View.QUANTITY_OWNED)</div>
+                    <div class="analysisValue">@userNFTOwner.get.quantity</div>
+                </div>
+            }
+            <div class="separator"></div>
+
+            @if(optionalLoginState.isDefined && optionalLoginState.get.username == collection.creatorId) {
+                <div id="createSaleButton">
+                    <script src="@utilities.PublicResource.getVersionedRoute("javascripts/sale/sale.js")"></script>
+                    @commonPrimaryButton(constants.View.CREATE_COLLECTION_SALE, JavaScript(s"saleOptions()"))
+                    <div class="hidden" id="saleOptionModal">
+                    @views.html.sale.saleOption(collection.id, nft.id)
+                    </div>
+                </div>
+            }
+
+            <div id="saleRightCards"></div>
+            <div id="publicListingRightCards"></div>
+            <div id="secondaryMarketRightCards"></div>
+        </div>
+    </div>
+</div>
+    <script>
+            componentResource('saleRightCards', jsRoutes.controllers.NFTController.saleRightCards('@nft.id'));
+            componentResource('publicListingRightCards', jsRoutes.controllers.NFTController.publicListingRightCards('@nft.id'));
+            componentResource('secondaryMarketRightCards', jsRoutes.controllers.NFTController.secondaryMarketRightCards('@nft.id'));
+    </script>

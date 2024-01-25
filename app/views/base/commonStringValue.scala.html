@@ -1,0 +1,15 @@
+@(message:String, id:String, length:Int, showToolTip: Boolean = true)
+
+@if(showToolTip) {
+    <span id="@id" class="stringValue" data-toggle="tooltip" data-placement="top" title="@message">
+        @message
+    </span>
+}else{
+    <span id="@id" class="stringValue">
+        @message
+    </span>
+}
+<script>
+    truncate('@message', '@id' ,@length);
+    $('[data-toggle="tooltip"]').tooltip();
+</script>

@@ -1,0 +1,40 @@
+@import views.html.base.modal._
+@import models.blockchainTransaction.UserTransaction
+@import models.master.NFT
+
+@(blockchainTx: UserTransaction, tweetURI: Option[String] = None, nfts: Seq[NFT] = Seq())(implicit requestHeader: RequestHeader, messagesProvider: MessagesProvider)
+
+@if(nfts.nonEmpty) {
+    @views.html.base.commonNFTReveal(nfts.map(_.getS3Url))
+}
+@if(blockchainTx.status.nonEmpty) {
+    @if(!blockchainTx.status.get) {
+        @errorModal(heading = constants.View.BROADCASTING_BLOCKCHAIN_TRANSACTION_FAILURE_TITLE, subHeading = blockchainTx.log.getOrElse(""))
+        @* @log *@
+    }
+} else {
+    @successModal(heading = constants.View.BROADCASTING_BLOCKCHAIN_TRANSACTION_SUCCESS_TITLE, subHeading = constants.View.BLOCKCHAIN_TRANSACTION_SUCCESS_SUBTITLE)
+    <div class="form-address-box">
+        <div class="form-address-box-item">
+            <span class="address-box-label">@Messages(constants.View.HASH)</span>
+            <span class="address-box-text">
+                <span class="username-data" data-value="@blockchainTx.txHash">@blockchainTx.txHash</span>
+                <span class="form-copy-icon" onclick="copyToClipboard(this)"><img src="@routes.Assets.versioned("images/icon/copy.png")"/></span>
+                <span class="form-copy-message">@Messages(constants.View.TOOLTIP_COPIED)</span>
+            </span>
+        </div>
+    </div>
+    @if(tweetURI.isDefined) {
+        @defining(tweetURI.get) { uri =>
+            <div class="horizontal-align">
+                <a href='@uri' target="_blank">
+                    <button class="form-primary-button">
+                        <span>
+                            <img src="@routes.Assets.versioned("images/icon/twitterBlack.svg")" class="icon"/>
+                        </span>
+                    </button>
+                </a>
+            </div>
+        }
+    }
+}

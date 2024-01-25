@@ -1,0 +1,44 @@
+@import views.account.companion.VerifyMnemonics
+@import views.html.base.buttons._
+
+@(walletMnemonicsForm: Form[VerifyMnemonics.Data] = VerifyMnemonics.form, username: String, address: String, partialMnemonics: Seq[String])(implicit requestHeader: RequestHeader, messagesProvider: MessagesProvider)
+<div id="walletMnemonics">
+    <div class="modal-header">
+        <h5 class="modal-title" id="staticBackdropLabel">@Messages(constants.View.RECOVERY_PHRASE)</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close" onclick="closeModal()">
+                    &times;
+        </button>
+    </div>
+    @views.html.base.modal.successModalAddressBox(Symbol("address") -> address)
+
+    <div class="mt-4 form-copy-item">
+        <div>@Messages(constants.View.RECOVERY_PHRASE)</div>
+    </div>
+    <div class="d-flex align-items-center justify-content-between mt-3 form-seed-box-list">
+      @partialMnemonics.zipWithIndex.map { case (word, index) =>
+        @views.html.base.modal.seedInput((index + 1).toString, Symbol("phrase") -> word, Symbol("class") -> "disable")
+      }
+    </div>
+    <div class="d-flex align-items-center gap-2 mt-3 form-information-message">
+      <div class="form-information-icon">
+        <i class="bi bi-info-circle iconDefault iconSmall"></i>
+      </div>
+      <div class="form-information-text">@Messages(constants.View.CREATE_WALLET_INFO)</div>
+    </div>
+    <div class="form-heading">@Messages(constants.View.CREATE_WALLET_SAFETY_POINTS_TITLE)</div>
+    <div class="form-bullet-list">
+        <ul>
+            <li>@Messages(constants.View.CREATE_WALLET_SAFETY_POINT_1)</li>
+            <li>@Messages(constants.View.CREATE_WALLET_SAFETY_POINT_2)</li>
+            <li>@Messages(constants.View.CREATE_WALLET_SAFETY_POINT_3)</li>
+        </ul>
+    </div>
+    <div class="horizontal-align">
+        @commonSecondaryButton(constants.View.CANCEL, JavaScript(s"closeModal()"), Symbol("data-bs-dismiss") -> "modal", Symbol("aria-label") -> "Close")
+        @commonPrimaryButton(constants.View.NEXT, JavaScript(s"showHideModalScreen('#verificationForm', '#walletMnemonics')"))
+    </div>
+</div>
+
+<div id="verificationForm" style="display: none;">
+@views.html.account.verifyWalletMnemonics(walletMnemonicsForm, username)
+</div>

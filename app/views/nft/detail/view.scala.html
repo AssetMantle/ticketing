@@ -1,0 +1,30 @@
+@import controllers.actions.LoginState
+@import views.html.base.commonHorizontalSwitcher
+
+@import scala.collection.immutable.ListMap
+
+@(nftId: String, totalSupply: BigInt, activeTab: String)(implicit requestHeader: RequestHeader, messagesProvider: MessagesProvider, loginState: Option[LoginState])
+
+<div class="item item-center centerContainer">
+    <div class="centerCard">
+        <div class="contentContainer">
+            @if(totalSupply > 1) {
+                @commonHorizontalSwitcher(
+                    ListMap(
+                        constants.View.OVERVIEW -> (routes.javascript.NFTController.details, JavaScript(s"changeNFTStateOnSwitcher('${nftId}', '${constants.View.OVERVIEW}')")),
+                        constants.View.TRADE -> (routes.javascript.NFTController.trade, JavaScript(s"changeNFTStateOnSwitcher('${nftId}','${constants.View.TRADE}')")),
+                    ),
+                    activeTab,
+                    Symbol(constants.View.OVERVIEW + "_PARAMETERS") -> s"'${nftId}'",
+                    Symbol(constants.View.TRADE + "_PARAMETERS") -> s"'${nftId}'",
+                )
+            } else {
+                <div id="singleNFTOverview"></div>
+                <script>
+                    componentResource('singleNFTOverview', jsRoutes.controllers.NFTController.details('@nftId'));
+                    checkAndPushState(jsRoutes.controllers.NFTController.viewNFT('@nftId').url, ('@nftId'), 'nft');
+                </script>
+            }
+        </div>
+    </div>
+</div>

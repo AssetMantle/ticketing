@@ -1,0 +1,65 @@
+@import controllers.actions.LoginState
+@import models.master.{Collection, PublicListing}
+@import views.html.base.buttons._
+
+@(collection: Collection, publicListing: Option[PublicListing])(implicit requestHeader: RequestHeader, messagesProvider: MessagesProvider, optionalLoginState: Option[LoginState])
+
+@if(publicListing.isDefined) {
+    <div class="d-flex justify-content-between align-items-center">
+        <div class="title">@Messages(constants.View.PUBLIC_LISTING_TITLE)</div>
+        @if(publicListing.get.getStatus(publicListing.get.totalSold).id == constants.PublicListing.LIVE.id) {
+            <div class="badge">@Messages(constants.View.SALE_LIVE_LABEL)</div>
+        }
+        @if(publicListing.get.getStatus(publicListing.get.totalSold).id == constants.PublicListing.SOLD_OUT.id) {
+            <div class="badge">@Messages(constants.PublicListing.SOLD_OUT.value)</div>
+        }
+        @if(publicListing.get.getStatus(publicListing.get.totalSold).id == constants.PublicListing.ENDED.id) {
+            <div class="badge">@Messages(constants.PublicListing.ENDED.value)</div>
+        }
+    </div>
+
+    @views.html.base.commonProgressBar(totalSold = publicListing.get.totalSold, totalOnSale = publicListing.get.numberOfNFTs)
+    <div class="analysisValue mb-2 mt-4">@Messages(constants.View.COLLECTION_SALE_PRICE)</div>
+    <div class="d-flex flex-row gap-1 priceHolder">
+        <img class="align-middle" src="@routes.Assets.versioned("images/NFTCard/token.svg")" width="24" height="27"/>
+        <div class="d-flex gap-1 align-items-center flex-wrap">
+            <div class="nft-mantle-price">@publicListing.get.price.toString @Messages(constants.View.NFT_SALE_TOKEN_UNITS)</div>
+            <div class="nft-dollar-price">(@utilities.NumericOperation.formatNumber(publicListing.get.price) $)</div>
+        </div>
+    </div>
+
+    <div class="d-flex flex-column gap-1 mt-3">
+        <div class="analysisValue">@Messages(constants.View.COLLECTION_MAXIMUM_MINT_PER_USER, publicListing.get.maxPerAccount)</div>
+    </div>
+    @if(publicListing.get.getStatus(publicListing.get.totalSold).id == constants.PublicListing.NOT_STARTED.id) {
+        <div class="d-flex flex-column gap-1 mt-3">
+            <div class="analysisTitle">@Messages(constants.View.SALE_START_TIME)</div>
+            <div id="countdown_@publicListing.get.startTimeEpoch" class="d-flex gap-2 analysisValue">
+            @publicListing.get.startTimeEpoch
+            </div>
+        </div>
+        <script>epochToDateTime('countdown_@publicListing.get.startTimeEpoch');</script>
+    } else {
+        @if(publicListing.get.getStatus(publicListing.get.totalSold).id != constants.PublicListing.SOLD_OUT.id) {
+            <div class="d-flex flex-column gap-1 mt-3">
+                <div class="analysisTitle">@Messages(constants.View.SALE_ENDS_IN)</div>
+                <div id="countdown_@publicListing.get.endTimeEpoch" class="d-flex gap-2 analysisValue">
+                @publicListing.get.endTimeEpoch
+                </div>
+            </div>
+            <script>epochToDateTime('countdown_@publicListing.get.endTimeEpoch');</script>
+            @if(publicListing.get.getStatus(publicListing.get.totalSold).id == constants.PublicListing.LIVE.id) {
+                @if(optionalLoginState.isDefined) {
+                    @if(optionalLoginState.get.username != collection.creatorId) {
+                        @commonPrimaryButton(Messages(constants.View.BUYNOW), JavaScript(s"getForm(jsRoutes.controllers.PublicListingController.buyNFTForm('${publicListing.get.id}'))"), Symbol("class") -> "mt-4")
+                    } else {
+                        @commonPrimaryButton(Messages(constants.Form.STOP_PUBLIC_LISTING.button), JavaScript(s"getForm(jsRoutes.controllers.PublicListingController.stopForm('${publicListing.get.id}'))"), Symbol("class") -> "mt-4")
+                    }
+                } else {
+                    @commonPrimaryButton(Messages(constants.View.BUYNOW), JavaScript(s"getForm(jsRoutes.controllers.AccountController.signInWithCallbackForm('/collection/${collection.id}'))"), Symbol("class") -> "mt-4")
+                }
+            }
+        }
+    }
+    <script src="@utilities.PublicResource.getVersionedRoute("javascripts/collections/publicListing.js")"></script>
+}

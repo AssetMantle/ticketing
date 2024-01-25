@@ -1,0 +1,59 @@
+@import controllers.actions.LoginState
+@import views.html.base.commonHorizontalSwitcher
+@import scala.collection.immutable.ListMap
+
+@(accountId: String, activeTab: String)(implicit requestHeader: RequestHeader, messagesProvider: MessagesProvider, optionalLoginState: Option[LoginState])
+
+<div class="item item-center centerContainer">
+    <div class="centerCard">
+        <div class="contentContainer">
+            @if(optionalLoginState.isDefined && optionalLoginState.fold("")(_.username) == accountId) {
+                @if(optionalLoginState.get.isCreator) {
+                    @commonHorizontalSwitcher(
+                        ListMap(
+                            constants.View.COLLECTED -> (routes.javascript.CollectedController.collectedSection, JavaScript(s"changeProfileStateOnSwitcher('$accountId', '${constants.View.COLLECTED}')")),
+                            constants.View.CREATED -> (routes.javascript.CollectionController.createdSection, JavaScript(s"changeProfileStateOnSwitcher('$accountId', '${constants.View.CREATED}')")),
+                            constants.View.WHITELIST -> (routes.javascript.WhitelistController.whitelistSection, JavaScript(s"changeProfileStateOnSwitcher('$accountId', '${constants.View.WHITELIST}')")),
+                            constants.View.WISHLIST -> (routes.javascript.WishlistController.wishlistSection, JavaScript(s"changeProfileStateOnSwitcher('$accountId', '${constants.View.WISHLIST}')")),
+                            constants.View.LISTED -> (routes.javascript.SecondaryMarketController.listedSection, JavaScript(s"changeProfileStateOnSwitcher('$accountId', '${constants.View.LISTED}')")),
+                            constants.View.TRANSACTIONS -> (routes.javascript.ProfileController.transactionsSection, JavaScript(s"changeProfileStateOnSwitcher('$accountId', '${constants.View.TRANSACTIONS}')")),
+                        ),
+                        activeTab,
+                        Symbol(constants.View.COLLECTED + "_PARAMETERS") -> s"'${accountId}'",
+                        Symbol(constants.View.CREATED + "_PARAMETERS") -> s"'${accountId}'",
+                        Symbol(constants.View.WISHLIST + "_PARAMETERS") -> s"'${accountId}'",
+                        Symbol(constants.View.LISTED + "_PARAMETERS") -> s"'${accountId}'"
+                    )
+                } else {
+                    @commonHorizontalSwitcher(
+                        ListMap(
+                            constants.View.COLLECTED -> (routes.javascript.CollectedController.collectedSection, JavaScript(s"changeProfileStateOnSwitcher('$accountId', '${constants.View.COLLECTED}')")),
+                            constants.View.WHITELIST -> (routes.javascript.WhitelistController.whitelistSection, JavaScript(s"changeProfileStateOnSwitcher('$accountId', '${constants.View.WHITELIST}')")),
+                            constants.View.WISHLIST -> (routes.javascript.WishlistController.wishlistSection, JavaScript(s"changeProfileStateOnSwitcher('$accountId', '${constants.View.WISHLIST}')")),
+                            constants.View.LISTED -> (routes.javascript.SecondaryMarketController.listedSection, JavaScript(s"changeProfileStateOnSwitcher('$accountId', '${constants.View.LISTED}')")),
+                            constants.View.TRANSACTIONS -> (routes.javascript.ProfileController.transactionsSection, JavaScript(s"changeProfileStateOnSwitcher('$accountId', '${constants.View.TRANSACTIONS}')")),
+                        ),
+                        activeTab,
+                        Symbol(constants.View.COLLECTED + "_PARAMETERS") -> s"'${accountId}'",
+                        Symbol(constants.View.WISHLIST + "_PARAMETERS") -> s"'${accountId}'",
+                        Symbol(constants.View.LISTED + "_PARAMETERS") -> s"'${accountId}'"
+                    )
+                }
+            } else {
+                @commonHorizontalSwitcher(
+                    ListMap(
+                        constants.View.COLLECTED -> (routes.javascript.CollectedController.collectedSection, JavaScript(s"changeProfileStateOnSwitcher('$accountId', '${constants.View.COLLECTED}')")),
+                        constants.View.CREATED -> (routes.javascript.CollectionController.createdSection,  JavaScript(s"changeProfileStateOnSwitcher('$accountId', '${constants.View.CREATED}')")),
+                        constants.View.WISHLIST -> (routes.javascript.WishlistController.wishlistSection, JavaScript(s"changeProfileStateOnSwitcher('$accountId', '${constants.View.WISHLIST}')")),
+                        constants.View.LISTED -> (routes.javascript.SecondaryMarketController.listedSection, JavaScript(s"changeProfileStateOnSwitcher('$accountId', '${constants.View.LISTED}')")),
+                    ),
+                    activeTab,
+                    Symbol(constants.View.COLLECTED + "_PARAMETERS") -> s"'${accountId}'",
+                    Symbol(constants.View.CREATED + "_PARAMETERS") -> s"'${accountId}'",
+                    Symbol(constants.View.WISHLIST + "_PARAMETERS") -> s"'${accountId}'",
+                    Symbol(constants.View.LISTED + "_PARAMETERS") -> s"'${accountId}'"
+                )
+            }
+        </div>
+    </div>
+</div>

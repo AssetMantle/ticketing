@@ -1,0 +1,1099 @@
+@mixin setFont($type, $style, $weight, $size, $lineHeight, $color) {
+  font-family: $type;
+  font-style: $style;
+  font-weight: $weight;
+  font-size: $size;
+  line-height: $lineHeight;
+  color: $color;
+}
+
+/* Left Info Card  */
+.leftInfoCard,
+.rightInfoCard {
+  height: fit-content;
+  background-color: var(--card-color);
+  border-radius: 20px;
+  padding: 20px;
+
+  .title {
+    @include setFont(var(--font-type-2), normal, 700, 14px, 17px, var(--mantle-off-white));
+    text-transform: capitalize;
+  }
+
+  .description {
+    @include setFont(var(--font-type-2), normal, 400, 12px, 14px, var(--gray));
+    margin-top: 20px;
+  }
+
+  .separator {
+    height: 2px;
+    width: calc(100% + 40px);
+    background-color: #383838;
+    margin: 20px -20px 20px;
+  }
+
+  a, .icon {
+    height: 22px;
+    width: 22px;
+  }
+
+  .categorySection {
+    .categoryList {
+      margin-top: 10px;
+
+      .categoryBadge {
+        @include setFont(var(--font-type-2), normal, 400, 14px, 17px, var(--dark));
+        padding: 6px 20px;
+        background: rgba(242, 175, 19, 0.1);
+        border: 1px solid var(--dark);
+        border-radius: 24px;
+      }
+    }
+  }
+
+  .badgeImageText {
+    margin-top: 12px;
+    cursor: pointer;
+
+    img {
+      height: 32px;
+      width: 32px;
+      aspect-ratio: 1;
+      border-radius: 50%;
+    }
+
+    .badgeText {
+      @include setFont(var(--font-type-2), normal, 700, 14px, 17px, var(--dark));
+      text-transform: capitalize;
+    }
+  }
+
+  .analysisTitle {
+    @include setFont(var(--font-type-2), normal, 400, 12px, 14px, var(--gray));
+  }
+
+  .analysisValue {
+    @include setFont(var(--font-type-2), normal, 700, 14px, 17px, var(--mantle-off-white));
+  }
+
+  .priceHolder {
+    .nft-mantle-price {
+      @include setFont(var(--font-type-2), normal, 600, 18px, 22px, var(--default));
+    }
+
+    .nft-dollar-price {
+      @include setFont(var(--font-type-2), normal, 500, 12px, 14px, var(--disable));
+    }
+  }
+
+  .form-primary-button,
+  .form-secondary-button {
+    width: 100%;
+  }
+
+  .mintedNftWeightage {
+    margin-top: 14px;
+
+    .progressBar {
+      background-color: var(--line-2);
+      border-radius: 10px;
+
+      span {
+        background-color: var(--default);
+        display: block;
+        height: 8px;
+        border-radius: 10px;
+        position: relative;
+        overflow: hidden;
+      }
+    }
+  }
+
+  .nft-likes {
+    color: var(--gray);
+  }
+
+  .badge {
+    @include setFont(var(--font-type-2), normal, 700, 14px, 17px, var(--default));
+    text-transform: uppercase;
+  }
+}
+
+.collectionContainer {
+  width: 100%;
+  height: fit-content;
+  background-color: var(--card-color);
+  border-radius: 20px;
+  overflow: hidden;
+  margin-bottom: 100px;
+}
+
+/* NFT Preview Center Card */
+.nftPreviewContainer {
+  width: 100%;
+  height: fit-content;
+  background-color: var(--card-color);
+  border-radius: 20px;
+  overflow: hidden;
+  //padding: 20px;
+  .leftOptions {
+    li {
+      @include setFont(var(--font-type-1), normal, 500, 14px, 17px, var(--gray));
+      text-transform: capitalize;
+
+      &.active {
+        @include setFont(var(--font-type-1), normal, 700, 14px, 17px, var(--default));
+      }
+    }
+  }
+
+  .rightOptions {
+    li {
+      .icon {
+        height: 22px;
+        width: 22px;
+      }
+    }
+  }
+
+  .nftImagePreview {
+    background: var(--card-dark);
+    border-radius: 10px;
+    padding: 20px;
+
+    div {
+      overflow: hidden;
+
+      img {
+        display: block;
+        max-width: 100%;
+        max-height: 100%;
+        width: auto;
+        height: auto;
+        margin: auto;
+        border-radius: 10px;
+      }
+    }
+    &> a {
+      position: relative;
+      &> .nftImageOverOwner {
+        background-image: linear-gradient(0deg,#000,transparent 70%,transparent);
+        position: absolute;
+        top: 0;
+        width: 100%;
+        height: 100%;
+        display: flex;
+        justify-content: flex-end;
+        flex-direction: column;
+        padding: 8px;
+        color: var(--dark);
+      }
+    }
+  }
+
+  .nftPropertyContainer {
+    background: var(--card-dark);
+    border-radius: 10px;
+    margin-top: 20px;
+    padding: 20px;
+
+    .title {
+      @include setFont(var(--font-type-2), normal, 700, 14px, 17px, var(--mantle-off-white));
+      text-transform: capitalize;
+
+      .dropdownIcon {
+        display: inline-block;
+        transition: transform 0.3s ease;
+        cursor: pointer;
+
+        &.active {
+          transform: rotate(180deg);
+        }
+      }
+    }
+
+    .propertyList {
+      padding-right: 20px;
+      margin-top: 20px;
+
+      .singleProperty {
+        background: var(--popup-bg);
+        border: 1px solid var(--dark);
+        border-radius: 12px;
+        padding: 12px 24px;
+
+        .propertyName {
+          @include setFont(var(--font-type-2), normal, 400, 14px, 17px, var(--dark));
+          text-transform: uppercase;
+        }
+
+        .propertyValue {
+          @include setFont(var(--font-type-2), normal, 400, 14px, 17px, var(--mantle-off-white));
+        }
+
+        .propertyRarity {
+          @include setFont(var(--font-type-2), normal, 400, 12px, 14px, var(--gray));
+        }
+      }
+    }
+  }
+
+  .nftOffersContainer {
+    background: var(--card-dark);
+    border-radius: 10px;
+    margin-top: 20px;
+    padding: 20px;
+
+    .title {
+      @include setFont(var(--font-type-2), normal, 700, 14px, 17px, var(--mantle-off-white));
+      text-transform: capitalize;
+
+      .cardLink {
+        @include setFont(var(--font-type-2), normal, 600, 16px, 19px, var(--mantle-off-white));
+        background: radial-gradient(50% 50% at 50% 50%, #FFC640 47.4%, #F2AF13 100%);
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+        background-clip: text;
+        text-fill-color: transparent;
+        cursor: pointer;
+      }
+    }
+  }
+
+  .contentTableContainer {
+    .contentTable {
+      border-collapse: collapse;
+      width: 100%;
+      overflow-x: auto;
+      display: block;
+
+      thead {
+        tr {
+          border-color: var(--line-2);
+
+          th {
+            @include setFont(var(--font-type-2), normal, 700, 14px, 17px, var(--mantle-off-white));
+            text-transform: capitalize;
+            min-width: 140px;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            max-width: 140px;
+            display: table-cell;
+            vertical-align: middle;
+            padding: 20px 20px 20px 0px !important;
+          }
+
+        }
+      }
+
+      tbody {
+        overflow-y: auto;
+        overflow-x: hidden;
+        height: fit-content;
+        max-height: 250px;
+
+        tr {
+          border-color: var(--line-2);
+
+          td {
+            @include setFont(var(--font-type-2), normal, 400, 12px, 14px, var(--gray));
+            min-width: 140px;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            max-width: 140px;
+            display: table-cell;
+            vertical-align: middle;
+            padding: 20px 20px 20px 0px !important;
+
+            .statusCircle {
+              display: inline-block;
+              width: 12px;
+              height: 12px;
+              aspect-ratio: 1;
+              border-radius: 50%;
+
+              &:first-child {
+                margin-right: 4px;
+              }
+
+              &.onGoing {
+                background: var(--connected);
+                box-shadow: 1.41818px 1.41818px 2.83636px rgba(0, 0, 0, 0.2), inset -1.41818px -1.41818px 2.83636px rgba(0, 0, 0, 0.2), inset 1.41818px 1.41818px 2.83636px #61A956;
+              }
+
+              &.ended {
+                background: var(--error);
+                box-shadow: 0.531818px 0.531818px 1.06364px rgba(0, 0, 0, 0.2), inset -0.531818px -0.531818px 1.06364px rgba(0, 0, 0, 0.2), inset 0.531818px 0.531818px 1.06364px #EC6969;
+              }
+            }
+
+            &.whitelistActionButton {
+              img {
+                margin-left: 20px;
+                cursor: pointer;
+              }
+            }
+
+            &.tableFieldName {
+              overflow: hidden;
+              text-overflow: ellipsis;
+              color: var(--dark);
+              white-space: nowrap;
+            }
+          }
+        }
+      }
+    }
+
+    #whitelistRequestsSent {
+      display: none;
+
+      &.show {
+        display: block;
+      }
+    }
+
+    #whitelistRequestsReceived {
+      display: none;
+
+      &.show {
+        display: block;
+      }
+    }
+
+    .searchBox {
+      position: relative;
+      width: 100%;
+
+      input {
+        @include setFont(var(--font-type-2), normal, 400, 14px, 17px, var(--mantle-off-white));
+        box-sizing: border-box;
+        padding: 10px 12px;
+        margin-top: 8px;
+        letter-spacing: 1px;
+        width: 100%;
+        height: 36px;
+        border: 1px solid var(--inactive-gray);
+        border-radius: 8px;
+        background-color: transparent;
+        outline: none;
+        display: block;
+
+        &::placeholder {
+          color: var(--inactive-gray);
+          text-transform: capitalize;
+        }
+
+        &:focus {
+          border-color: var(--dark);
+        }
+
+        &:not(:focus) {
+          color: var(--inactive-gray);
+          border-color: var(--gray);
+        }
+      }
+
+      .autocomplete-items {
+        position: absolute;
+        width: 100%;
+        height: fit-content;
+        max-height: 500px;
+        overflow-y: auto;
+        background-color: var(--card-color);
+        border: 1px solid var(--dark);
+        padding: 6px 0px 6px 0px;
+        border-radius: 0px 0px 8px 8px;
+
+        & > div {
+          @include setFont(var(--font-type-2), normal, 400, 14px, 17px, var(--gray));
+          padding: 6px 12px 6px 10px;
+
+          strong {
+            color: var(--mantle-off-white);
+          }
+        }
+
+        &::-webkit-scrollbar {
+          margin-right: 10px;
+        }
+      }
+    }
+
+    .whitelistMembers {
+      overflow-y: auto;
+      height: fit-content;
+      max-height: 530px;
+
+      .singleMemberName {
+        @include setFont(var(--font-type-2), normal, 400, 14px, 17px, var(--dark));
+        text-align: center;
+        display: inline-block;
+        background: rgba(242, 175, 19, 0.1);
+        border: 1px solid var(--dark);
+        border-radius: 24px;
+        margin-right: 12px;
+        margin-bottom: 16px;
+      }
+    }
+
+    &#nftOffersTable {
+      .contentTable {
+        tbody {
+          display: inline-block;
+          max-height: 230px;
+          overflow-y: scroll;
+          height: fit-content;
+        }
+      }
+    }
+  }
+
+  #nftOffersTable {
+    .tableFieldNo {
+      min-width: 50px;
+    }
+
+    .tableFieldName {
+      min-width: 130px;
+      max-width: 130px;
+    }
+
+    .tableFieldStatus {
+      min-width: 90px;
+    }
+
+    .tableFieldTotalMembers {
+      min-width: 120px;
+    }
+
+    .tableFieldMaxMembers {
+      min-width: 110px;
+    }
+
+    .tableFieldSale {
+      min-width: 140px;
+    }
+
+    .tableFieldRequestStatus {
+      min-width: 120px;
+
+      &.statusPending {
+        color: var(--disable);
+      }
+
+      &.statusAccepted {
+        color: var(--connected);
+      }
+
+      &.statusDeclined {
+        color: var(--error);
+      }
+    }
+
+    .tableFieldOfferName {
+      min-width: 200px;
+    }
+
+    .tableFieldPrice {
+      min-width: 50px;
+    }
+
+    .tableFieldFloorDifference {
+      min-width: 125px;
+
+      &.aboveFloor {
+        color: var(--connected);
+        position: relative;
+
+        &:before {
+          content: "";
+          background: url("../images/icon/upArrowGreen.png");
+          background-repeat: no-repeat;
+          background-size: cover;
+          position: absolute;
+          width: 12px;
+          height: 12px;
+          left: 0;
+        }
+      }
+
+      &.belowFloor {
+        color: var(--error);
+        position: relative;
+
+        &:before {
+          content: "";
+          background: url("../images/icon/downArrowRed.png");
+          background-repeat: no-repeat;
+          background-size: cover;
+          position: absolute;
+          width: 12px;
+          height: 12px;
+          left: 0;
+        }
+      }
+    }
+
+    .tableFieldDuration {
+      min-width: 220px;
+    }
+
+    .tableFieldAction {
+      min-width: 80px;
+
+      img {
+        width: 20px;
+        height: 20px;
+      }
+    }
+  }
+}
+
+
+// Loader
+.loading {
+  opacity: 0;
+  display: flex;
+  position: absolute;
+  margin-top: 3px;
+  left: 50%;
+  transform: translateX(-50%);
+  transition: opacity .3s ease-in;
+}
+
+.loading.show {
+  opacity: 1;
+}
+
+.ball {
+  background-color: var(--dark);
+  border-radius: 50%;
+  margin: 5px;
+  height: 8px;
+  width: 8px;
+  animation: jump .5s ease-in infinite;
+}
+
+.ball:nth-of-type(2) {
+  animation-delay: 0.1s;
+}
+
+.ball:nth-of-type(3) {
+  animation-delay: 0.2s;
+}
+
+@keyframes jump {
+  0%, 100% {
+    transform: translateY(0);
+  }
+
+  50% {
+    transform: translateY(-6px);
+  }
+}
+
+#loadMoreBtnContainer.hide {
+  display: none !important;
+}
+
+// Show/Hide Load More Button and Loader
+.loadMoreElement {
+  display: none;
+
+  &.show {
+    display: block;
+  }
+}
+
+.toggleBtn {
+  position: relative;
+  right: 0;
+
+  button {
+    box-shadow: none !important;
+    border: 2px solid var(--line);
+    background: var(--popup-bg);
+    @include setFont(var(--font-type-2), normal, 400, 12px, 14px, var(--text-medium));
+
+    &:first-child {
+      border-top-left-radius: 4px;
+      border-bottom-left-radius: 4px;
+    }
+
+    &:last-child {
+      border-top-right-radius: 4px;
+      border-bottom-right-radius: 4px;
+    }
+
+    &:hover {
+      background: var(--dark);
+      border: 2px solid var(--line);
+    }
+
+    &.active {
+      background: var(--dark);
+      border: 2px solid var(--line);
+      @include setFont(var(--font-type-2), normal, 400, 12px, 14px, var(--card-color));
+    }
+  }
+}
+
+// Center Container
+.centerContainer {
+  width: 100%;
+  height: fit-content;
+  background-color: var(--card-color);
+  border-radius: 20px;
+
+  .centerCard {
+    background-color: var(--card-color);
+    padding: 20px 20px 20px 20px;
+    border-radius: 20px;
+
+    .contentContainer {
+      .tab-content {
+        .collectionContainer {
+          border-radius: 0px;
+
+          .profile-card {
+            padding: 0px;
+          }
+        }
+      }
+    }
+  }
+
+  @media (min-width: 768px) {
+    margin-bottom: 100px;
+  }
+  @media (max-width: 768px) {
+    margin-bottom: 0px;
+  }
+}
+
+// Empty Collection
+.emptyList {
+  background-color: var(--card-dark);
+  width: 100%;
+  border-radius: 10px;
+  height: 500px;
+  min-height: 500px;
+
+  .message {
+    @include setFont(var(--font-type-2), normal, 600, 18px, 22px, var(--mantle-off-white));
+  }
+}
+
+// Max Limit for Collection
+.maxDraftLimitInfo {
+  @include setFont(var(--font-type-2), normal, 600, 18px, 22px, var(--mantle-off-white));
+}
+
+// Draft NFT
+.draftNft {
+  position: relative;
+
+  &:before {
+    content: '';
+    width: 66px;
+    height: 26px;
+    position: absolute;
+    background-image: url("../images/icon/draftBadge.png");
+    background-size: cover;
+    left: 12px;
+    top: 20px;
+    z-index: 99;
+  }
+}
+
+// Whitelist Members list
+.whitelistMembersContainer {
+
+  .searchField {
+    width: 100%;
+    height: 40px;
+    border: 1px solid var(--inactive-gray);
+    border-radius: 8px;
+    display: block;
+
+    i {
+      font-size: 16px;
+      padding: 10px 0px 10px 14px;
+    }
+
+    input {
+      @include setFont(var(--font-type-2), normal, 400, 14px, 17px, var(--mantle-off-white));
+      background-color: transparent;
+      flex: 1;
+      height: 36px;
+      border: none;
+      outline: none;
+      letter-spacing: 1px;
+      padding: 10px 12px;
+    }
+  }
+}
+
+.memberListContainer {
+  margin: 24px 0px;
+  background-color: var(--card-dark);
+  border-radius: 10px;
+  padding: 20px !important;
+
+  .header {
+    padding: 12px 16px 24px 16px;
+    border-bottom: 1px solid var(--line-2);
+
+    .fieldNo {
+      width: 16px;
+    }
+
+    .fieldName {
+      flex: 1;
+    }
+
+    div {
+      @include setFont(var(--font-type-2), normal, 700, 14px, 17px, var(--mantle-off-white));
+      text-transform: capitalize;
+    }
+  }
+
+  #memberList {
+    list-style-type: none;
+    height: 100%;
+    max-height: 370px;
+    overflow-y: auto;
+
+    li {
+      padding: 8px 8px;
+      border-bottom: 1px solid var(--line-2);
+
+      .memberIndex {
+        width: 24px;
+        @include setFont(var(--font-type-2), normal, 400, 12px, 14px, var(--mantle-off-white));
+        text-align: right;
+      }
+
+      .memberProfile {
+        img {
+          height: 28px;
+          width: 28px;
+          aspect-ratio: 1;
+          border-radius: 50%;
+          margin-top: 4px;
+        }
+      }
+
+      .username {
+        @include setFont(var(--font-type-2), normal, 400, 12px, 14px, var(--gray));
+      }
+
+      .deleteIcon {
+        width: 30px;
+        cursor: pointer;
+      }
+    }
+  }
+}
+
+// Content Detail
+.singleItemDetailContainer {
+  .headerWithIcon {
+    .headerTop {
+      margin-right: 12px;
+
+      .back-button-icon {
+        height: 40px;
+        width: 40px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        border-radius: 20px;
+        cursor: pointer;
+
+        &:hover {
+          background-color: var(--popup-stroke);
+        }
+      }
+
+      .titleText {
+        @include setFont(var(--font-type-1), normal, 600, 20px, 24px, var(--mantle-off-white));
+      }
+    }
+
+    .sharableLink {
+      cursor: pointer;
+    }
+  }
+
+  .detailCard {
+    background-color: var(--card-dark);
+    border-radius: 10px;
+
+    .detailTitle {
+      @include setFont(var(--font-type-2), normal, 600, 18px, 22px, var(--mantle-off-white));
+      padding: 16px 24px;
+    }
+
+    .detailBody {
+      .fieldTitle {
+        @include setFont(var(--font-type-2), normal, 700, 14px, 17px, var(--mantle-off-white));
+      }
+
+      .fieldValue {
+        @include setFont(var(--font-type-2), normal, 400, 12px, 14px, var(--gray));
+
+        .tertiaryButton {
+          @include setFont(var(--font-type-2), normal, 400, 12px, 14px, var(--dark));
+
+          i {
+            font-size: 12px !important;
+          }
+        }
+      }
+    }
+  }
+
+  .statusOptions {
+    .option {
+      display: none;
+
+      &.active {
+        display: block;
+      }
+    }
+
+    .statusBadge {
+      height: 12px;
+      width: 12px;
+      aspect-ratio: 1;
+      border-radius: 50%;
+
+      &.notStarted {
+        background-color: var(--disable);
+      }
+
+      &.started {
+        background-color: var(--connected);
+      }
+
+      &.ended {
+        background-color: var(--error);
+      }
+    }
+  }
+}
+
+// Collection Card
+.commonCollectionCard {
+  .profile-section {
+    .collectionLink {
+      .saleBadge {
+        position: relative;
+
+        .option {
+          background-color: var(--popup-bg);
+          border: 1px solid var(--default);
+          padding: 4px 8px;
+          border-radius: 8px;
+          position: absolute;
+          right: 16px;
+          top: 12px;
+          z-index: 99;
+          display: none;
+
+          .statusDotWrapper {
+            position: relative;
+            z-index: 0;
+
+            .statusDotEmitter {
+              position: relative;
+              margin: 0 auto;
+              width: 6px;
+              height: 6px;
+              border-radius: 99px;
+
+              .statusDotWave {
+                width: 6px;
+                height: 6px;
+                position: absolute;
+                top: 0;
+                left: 0;
+                border-radius: 9999px;
+                background-color: var(--connected);
+                opacity: 0;
+                z-index: -1;
+                pointer-events: none;
+              }
+            }
+          }
+
+          &.active {
+            display: inline-block;
+          }
+
+          &.live {
+            @include setFont(var(--font-type-2), normal, 400, 12px, 14px, var(--mantle-off-white));
+
+            .statusDot {
+              background-color: var(--connected);
+            }
+
+            .statusDotEmitter {
+              background-color: var(--connected);
+
+              .statusDotWave {
+                animation: sonarWave 2s linear infinite;
+                @keyframes sonarWave {
+                  from {
+                    opacity: 0.4;
+                  }
+                  to {
+                    transform: scale(3);
+                    opacity: 0;
+                  }
+                }
+              }
+            }
+          }
+
+          &.ended {
+            @include setFont(var(--font-type-2), normal, 400, 12px, 14px, var(--default));
+
+            .statusDotEmitter {
+              background-color: var(--error);
+            }
+          }
+
+          &.soldOut {
+            @include setFont(var(--font-type-2), normal, 400, 12px, 14px, var(--default));
+
+            .statusDotWrapper {
+              display: none;
+            }
+          }
+        }
+      }
+    }
+
+    .profile-detail {
+      .collectionDetail {
+        padding: 0 20px;
+
+        .leftInfo {
+          h1 {
+            text-align: left;
+          }
+
+          .collectionBottomContainer {
+            .collectionStats {
+              .collectionStatsContainer {
+                margin: 0px 0px 12px 0px;
+
+                .collectionStatsBadge {
+                  background-color: var(--popup-bg);
+                  border-radius: 8px;
+                  padding: 4px 6px;
+
+                  .badgeLabel {
+                    @include setFont(var(--font-type-2), normal, 400, 12px, 14px, var(--mantle-off-white));
+                    white-space: nowrap;
+                  }
+
+                  .badgeValue {
+                    @include setFont(var(--font-type-1), normal, 500, 12px, 14px, var(--gray));
+                    text-align: right;
+                    white-space: nowrap;
+                  }
+                }
+              }
+            }
+
+            @media (min-width: 1500px) {
+              flex-direction: column;
+              gap: 8px !important;
+            }
+            @media (max-width: 900px) {
+              flex-direction: column;
+              gap: 8px !important;
+            }
+          }
+        }
+
+        .rightInfo {
+          .collectionStatus {
+            margin-top: -8px;
+
+            .statusOptions {
+              gap: 14px;
+
+              .option {
+                font-size: 20px;
+                color: var(--disable);
+
+                &.active {
+                  i {
+                    color: var(--default);
+                  }
+                }
+
+                &.option2 {
+                  transform: rotate(90deg);
+                }
+
+                &.option3 {
+                  i {
+                    font-size: 22px;
+                  }
+                }
+              }
+            }
+          }
+
+        }
+      }
+    }
+  }
+
+  .collectionLink {
+    cursor: pointer;
+  }
+}
+
+.mintNFTForm {
+  .label-container {
+    label {
+      @include setFont(var(--font-type-2), normal, 700, 14px, 17px, var(--inactive-gray));
+    }
+  }
+
+  input {
+    @include setFont(var(--font-type-2), normal, 400, 14px, 17px, var(--mantle-off-white));
+    height: 36px;
+    box-sizing: border-box;
+    display: block;
+    width: 100%;
+    border: 1px solid var(--inactive-gray);
+    padding: calc(var(--size-bezel) * 2) 12px;
+    background: transparent;
+    border-radius: var(--size-radius);
+    letter-spacing: 1px;
+    outline: none !important;
+    box-shadow: none !important;
+
+    &:focus {
+      border-color: var(--dark);
+      background-color: transparent;
+      color: var(--mantle-off-white);
+
+      + .input-group-text {
+        border-color: var(--dark);
+      }
+    }
+
+    &::placeholder {
+      color: var(--inactive-gray);
+    }
+  }
+}

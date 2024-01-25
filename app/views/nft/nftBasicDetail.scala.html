@@ -1,0 +1,23 @@
+@import views.html.base.form._
+@import views.nft.companion.NFTBasicDetail
+@import models.masterTransaction.NFTDraft
+@import views.html.base.modal._
+
+@(nftBasicDetailForm: Form[NFTBasicDetail.Data] = NFTBasicDetail.form, collectionId: String, nftId: String, optionalNFTDraft: Option[NFTDraft])(implicit requestHeader: RequestHeader, messagesProvider: MessagesProvider)
+
+@commonForm(constants.Form.NFT_BASIC_DETAIL, nftBasicDetailForm, submitDisable = !(optionalNFTDraft.isDefined && optionalNFTDraft.get.name.isDefined)) {
+    @multiStepNavigator(Seq(Messages(constants.View.NFT_STEPPER_FILE),Messages(constants.View.COLLECTION_STEPPER_BASIC_INFORMATION)), defaultSelected = 1)
+    @if(optionalNFTDraft.isDefined && optionalNFTDraft.get.name.isDefined && optionalNFTDraft.get.description.isDefined && optionalNFTDraft.get.totalSupply.isDefined) {
+        @commonInputText(nftBasicDetailForm, constants.FormField.NFT_NAME, Symbol("value") -> optionalNFTDraft.get.name.get)
+        @commonDescriptionText(nftBasicDetailForm, constants.FormField.NFT_DESCRIPTION, Symbol("value") -> optionalNFTDraft.get.description.get)
+        @commonInputLong(nftBasicDetailForm, constants.FormField.NFT_TOTAL_SUPPLY, Symbol("value") -> optionalNFTDraft.get.totalSupply.get)
+    } else {
+        @commonInputText(nftBasicDetailForm, constants.FormField.NFT_NAME)
+        @commonDescriptionText(nftBasicDetailForm, constants.FormField.NFT_DESCRIPTION)
+        @commonInputLong(nftBasicDetailForm, constants.FormField.NFT_TOTAL_SUPPLY)
+    }
+    @commonToggleButton(nftBasicDetailForm, constants.FormField.SAVE_NFT_DRAFT)
+    @commonInputText(nftBasicDetailForm, constants.FormField.COLLECTION_ID, Symbol("value") -> collectionId, Symbol("containerDivClass") -> "hidden", Symbol("readonly") -> "readonly")
+    @commonInputText(nftBasicDetailForm, constants.FormField.NFT_ID, Symbol("value") -> nftId, Symbol("containerDivClass") -> "hidden", Symbol("readonly") -> "readonly")
+}
+<script src="@utilities.PublicResource.getVersionedRoute("javascripts/nfts/createNft.js")"></script>

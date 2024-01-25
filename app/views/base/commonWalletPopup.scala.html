@@ -1,0 +1,133 @@
+@import controllers.actions.LoginState
+@import views.html.base.{commonAddressValue, commonStringValue}
+
+@()(implicit requestHeader: RequestHeader, messagesProvider: MessagesProvider, loginState: LoginState)
+<div class="walletPopupContainer">
+    <div class="cardContainer">
+        <div class="d-flex justify-content-between">
+            <div class="label">@Messages(constants.View.MANTLEPLACE_IDENTITY)</div>
+            <div class="lh-1">
+                <a href="@routes.SettingController.viewSettings()" class="p-0">
+                    <i class="bi bi-gear iconDefault"></i>
+                </a>
+            </div>
+        </div>
+        <div class="d-flex gap-2 align-items-center flex-grow-1 userDetails">
+            <img src="@routes.Assets.versioned("images/defaultCollectionProfile.png")" class="rounded-circle" width="40" height="40"/>
+            <div class="ms-2 justify-content-between d-flex gap-2 align-items-center flex-grow-1">
+                <a href="@routes.ProfileController.viewProfile(loginState.username, constants.View.COLLECTED)" class="p-0 profileItemLink">
+                    <div class="userName">
+                    @commonStringValue(message = loginState.username, id = utilities.IdGenerator.getRandomHexadecimal, length = 18, showToolTip = false)
+                    </div>
+                </a>
+                <a href="@loginState.getExplorerUrl" target="_blank" class="p-0 lh-sm">
+                    <i class="bi bi-globe iconDefault"></i>
+                </a>
+            </div>
+        </div>
+        <div class="d-flex justify-content-between align-items-center mt-3">
+            <div class="userBalance" id="walletTradeBalance">
+                <span class="start">0</span><span class="end"> wMNTL</span>
+            </div>
+            <div class="d-flex gap-2">
+                <div class="primaryIconButton">
+                    <a onclick="getForm(@utilities.JsRoutes.getJsRouteString(constants.Form.UNWRAP_TOKEN.get, ""))" class="p-0">
+                        <img src="@routes.Assets.versioned("images/icon/unwrapBlack.svg")">
+                    </a>
+                </div>
+                <div class="secondaryIconButton">
+                    <a class="p-0 d-flex align-items-center" style="padding-top: 2px!important;" onclick="getForm(@utilities.JsRoutes.getJsRouteString(constants.Form.WRAP_COIN.get, ""))">
+                        <img src="@routes.Assets.versioned("images/icon/wrapYellow.svg")">
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="cardContainer mt-3">
+        <div class="d-flex justify-content-between">
+            <div class="label">@Messages(constants.View.ACTIVE_ADDRESS)</div>
+            <div class="lh-1">
+                <i class="bi bi-three-dots-vertical iconDefault" id="openWalletMenu" onclick="fetchKeys();
+                openCloseWalletScreen(this, 'addressBook');"></i>
+            </div>
+        </div>
+        <div class="d-flex gap-2 align-items-center flex-grow-1 userDetails">
+            <div class="d-flex flex-grow-1 justify-content-between align-items-center userAddressBox">
+                <span class="username-data" data-value="@loginState.address"></span>
+                <div class="flex-grow-1 p-0 userAddressData" onclick="copyToClipboard(this);
+                showSnackbar('', '@Messages(constants.View.ADDRESS_COPIED)', '@Messages(constants.View.NOTIFICATION_TITLE_INFO)');">
+                    @commonAddressValue(message = loginState.address, id = utilities.IdGenerator.getRandomHexadecimal, length = 10)
+                </div>
+                <div class="text-end copyIcon" onclick="copyToClipboard(this);
+                showSnackbar('', '@Messages(constants.View.ADDRESS_COPIED)', '@Messages(constants.View.NOTIFICATION_TITLE_INFO)');">
+                    <i id="openWalletMenu" class="bi bi-files iconDefault iconMedium"></i>
+                </div>
+            </div>
+        </div>
+        <div class="d-flex justify-content-between align-items-center mt-3">
+            <div class="userBalance walletBalance_@loginState.address"></div>
+            <div class="d-flex gap-2">
+                <div class="primaryIconButton">
+                    <a href="https://wallet.assetmantle.one/?toAddress=@loginState.address" target="_blank" class="p-0">
+                        <i class="bi bi-arrow-down-left"></i>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="mt-3 px-3">
+        <a href="@routes.ProfileController.viewProfile(loginState.username, constants.View.COLLECTED)" class="p-0">
+            <div class="py-2 primaryIconButton">
+                <div class="d-flex gap-2 justify-content-center align-items-center">
+                    <i class="bi bi-wallet2"></i>
+                    @Messages(constants.View.MY_ASSETS)
+                </div>
+            </div>
+        </a>
+    </div>
+
+    <div class="innerSeparator"></div>
+
+    <div class="d-flex justify-content-end me-3">
+        <a onclick="getForm(@utilities.JsRoutes.getJsRouteString(constants.Form.SIGN_OUT.get, ""))" class="p-0 tertiaryButton">
+            <div class="d-flex align-items-center gap-2">
+                <i class="bi bi-box-arrow-right iconDefault icon"></i>
+                <div class="profileMenuLabel">@Messages(constants.View.LOGOUT)</div>
+            </div>
+        </a>
+    </div>
+
+
+        <!-- Address Book -->
+    <div id="addressBook" class="addressBook">
+        <div class="d-flex flex-row gap-2 align-items-center mb-3 headerWithBackButton">
+            <div class="headerTitle">@Messages(constants.View.ADDRESS_BOOK_TITLE)</div>
+            <i id="addressBookCloseBtn" class="bi bi-chevron-right iconDefault mt-1" style="cursor: pointer;" onclick="openCloseWalletScreen(this, 'addressBook')"></i>
+        </div>
+        <div class="d-flex flex-column justify-content-between">
+            <div id="walletAddressList" class="mt-2 walletAddressList"></div>
+
+            <div class="bottomMenu buttons">
+                <div class="primaryButton" id="newAddressOptionOpenBtn" onclick="getForm(jsRoutes.controllers.SettingController.addNewKey())">@Messages(constants.View.ADD_NEW_ADDRESS_LABEL)</div>
+            </div>
+        </div>
+
+        <div class="innerSeparator"></div>
+
+        <div class="position-absolute end-0 me-4">
+            <a href="@routes.SettingController.viewSettings()" class="p-0 tertiaryButton">
+                <div class="d-flex align-items-center gap-2">
+                    <i class="bi bi-gear iconDefault icon"></i>
+                    <div class="profileMenuLabel">@Messages(constants.View.MENU_SETTINGS)</div>
+                </div>
+            </a>
+        </div>
+    </div>
+</div>
+<script src="@utilities.PublicResource.getVersionedRoute("javascripts/settings/settings.js")" type="text/javascript"></script>
+<script>
+        fetchBalance('@loginState.address');
+        fetchWrappedTokenBalance();
+</script>

@@ -1,0 +1,1651 @@
+@mixin setFont($type, $style, $weight, $size, $lineHeight, $color) {
+  font-family: $type;
+  font-style: $style;
+  font-weight: $weight;
+  font-size: $size;
+  line-height: $lineHeight;
+  color: $color;
+}
+
+// Dropdown Menu
+.dropdown {
+  display: inline-block;
+  width: 100%;
+  //z-index: 999;
+
+  .dropdownHead {
+    @include setFont(var(--font-type-2), normal, 400, 14px, 17px, var(--inactive-gray));
+    padding: 7px 12px;
+    border: 1px solid var(--gray);
+    border-radius: 8px;
+    cursor: pointer;
+    position: relative;
+    transition: all .5s;
+
+    &.active {
+      @include setFont(var(--font-type-2), normal, 400, 14px, 17px, var(--mantle-off-white));
+      border-bottom-left-radius: 0;
+      border-bottom-right-radius: 0;
+      border-color: var(--dark);
+      background: var(--card-color);
+    }
+
+    &::after {
+      position: absolute;
+      display: block;
+      content: '';
+      width: 10px;
+      height: 10px;
+      top: 50%;
+      right: 25px;
+      margin-top: -3px;
+      border-bottom: 1px solid var(--mantle-off-white);
+      border-right: 1px solid var(--mantle-off-white);
+      transform: rotate(45deg) translateY(-50%);
+      transition: all .4s ease-in-out;
+      transform-origin: 50% 0;
+    }
+
+    &.active::after {
+      margin-top: 3px;
+      transform: rotate(-135deg) translateY(-50%);
+      border-color: var(--default);
+    }
+
+    .currentSelected {
+      line-height: 20px;
+    }
+
+    &.active + .dropdownBody {
+      @include setFont(var(--font-type-2), normal, 400, 14px, 17px, var(--mantle-off-white));
+    }
+  }
+
+  .dropdownBody {
+    @include setFont(var(--font-type-2), normal, 400, 14px, 17px, var(--inactive-gray));
+    position: relative;
+
+    .dropdownBodyInner {
+      position: absolute;
+      left: 0;
+      top: 0;
+      width: 100%;
+      background: var(--card-color);
+      display: none;
+      border: 1px solid var(--dark);
+      border-top: none;
+      border-bottom-left-radius: 8px;
+      border-bottom-right-radius: 8px;
+      overflow: hidden;
+
+      .dropdownItem {
+        padding: 10px 12px;
+        cursor: pointer;
+        transition: all .5s;
+        background: var(--card-color);
+        line-height: 20px;
+        position: relative;
+        z-index: 999;
+
+        &:nth-last-child(1) {
+          padding-bottom: 10px;
+        }
+      }
+    }
+  }
+}
+
+// Tooltip
+.form-copy-message.active {
+  animation: msg-copied 2s ease-in-out forwards;
+}
+
+.form-copy-message {
+  margin-left: 5px;
+  font-size: 10px;
+  padding: 5px 10px;
+  border-radius: 5px;
+  background-color: var(--popup-bg);
+  color: var(--inactive-gray);
+  position: relative;
+  top: 10px;
+  opacity: 0;
+}
+.form-copy-message{
+  &.top {
+    margin-left: 5px;
+    font-size: 10px;
+    padding: 5px 10px;
+    border-radius: 5px;
+    background-color: var(--popup-bg);
+    color: var(--inactive-gray);
+    position: relative;
+    top: 10px;
+    left: -50%;
+    opacity: 1;
+  }
+}
+
+@media (max-width: 1200px) {
+  .form-copy-message {
+    display: none;
+  }
+  .form-copy-message.active {
+    animation: msg-copied 2s ease-in-out forwards;
+  }
+}
+
+@keyframes msg-copied {
+  0% {
+    top: 10px;
+    opacity: 0;
+  }
+  20% {
+    top: 0px;
+    opacity: 1;
+  }
+  80% {
+    top: 0px;
+    opacity: 1;
+  }
+  100% {
+    top: -10px;
+    opacity: 0;
+  }
+}
+
+// Coming Soon Btn
+#comingSoonBtn {
+  position: relative;
+  overflow: hidden;
+  outline: none;
+  cursor: pointer;
+}
+
+#comingSoonBtn::before {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: relative;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  content: 'Send';
+  transition: all .3s;
+}
+
+#comingSoonBtn::after {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: absolute;
+  top: 60px;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  content: 'Coming Soon';
+  transition: all .3s;
+}
+
+#comingSoonBtn:hover::before {
+  top: -60px;
+}
+
+#comingSoonBtn:hover::after {
+  top: 0;
+}
+
+// New Components
+.mntlButton {
+  @include setFont(var(--font-type-2), normal, 600, 16px, 19px, var(--button-text));
+  text-transform: capitalize;
+  width: 200px;
+  padding: 9px 0px;
+  border: none;
+  outline: none;
+  border-radius: 32px;
+
+  &.primaryButton {
+    &.active {
+      background-color: var(--default);
+
+      &:hover {
+        box-shadow: 0px 0px 10px rgba(255, 201, 66, 0.5);
+      }
+    }
+
+    &.disable {
+      background-color: var(--disable-yellow);
+      cursor: none;
+      pointer-events: none;
+      -webkit-touch-callout: none;
+      -webkit-user-select: none;
+      -moz-user-select: none;
+      -ms-user-select: none;
+      user-select: none;
+    }
+  }
+}
+
+.bi {
+  font-size: 20px;
+  line-height: 20px;
+
+  &.iconDefault {
+    color: var(--default);
+  }
+
+  &.iconBlack {
+    color: var(--card-dark);
+  }
+
+  &.iconWhite {
+    color: var(--mantle-off-white);
+  }
+
+  &.iconSuccess {
+    color: var(--connected);
+  }
+
+  &.iconError {
+    color: var(--error);
+  }
+
+  &.iconGray {
+    color: var(--gray);
+  }
+
+  &.iconGrayWhite{
+    color: var(--icon-white);
+  }
+
+  &.iconLarge {
+    font-size: 30px;
+  }
+
+  &.iconMedium {
+    font-size: 18px;
+  }
+
+  &.iconSmall {
+    font-size: 14px;
+  }
+
+  &.iconSize16 {
+    font-size: 16px;
+  }
+
+  &.iconSize20 {
+    font-size: 20px;
+  }
+
+  &.iconSize24 {
+    font-size: 24px;
+  }
+}
+
+// Add To Wishlist Button
+.addToWishlist {
+  border: none;
+  background: none;
+  transition: transform 0.4s ease;
+
+  &:hover {
+    cursor: pointer;
+  }
+
+  &:active {
+    transform: scale(1.3);
+  }
+
+  .heartIcon {
+    width: 18px;
+    height: 18px;
+
+    path {
+      fill: none;
+      stroke-width: 2;
+      stroke: var(--icon-white);
+    }
+  }
+
+  &.clicked {
+    .heartIcon {
+      path {
+        fill: var(--default);
+        stroke-width: 0;
+      }
+    }
+  }
+}
+
+// Toggle Button
+.toggleBtn {
+  position: relative;
+  right: 0;
+
+  span {
+    box-shadow: none !important;
+    border: 2px solid var(--line);
+    background: var(--popup-bg);
+    @include setFont(var(--font-type-2), normal, 600, 14px, 17px, var(--text-medium));
+
+    &:first-child {
+      border-top-left-radius: 4px;
+      border-bottom-left-radius: 4px;
+    }
+
+    &:last-child {
+      border-top-right-radius: 4px;
+      border-bottom-right-radius: 4px;
+    }
+
+    &:hover {
+      background: var(--dark);
+      border: 2px solid var(--line);
+    }
+
+    &.active {
+      background: var(--dark);
+      border: 2px solid var(--line);
+      @include setFont(var(--font-type-2), normal, 600, 14px, 17px, var(--card-color));
+    }
+  }
+}
+
+#gasPriceToggleButton {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  grid-auto-flow: column;
+}
+
+// Menu on Hover
+.hoverMenu {
+  @include setFont(var(--font-type-1), normal, 500, 14px, 17px, var(--mantle-off-white));
+  text-transform: capitalize;
+  display: flex;
+  align-items: center;
+  cursor: pointer;
+  .links {
+    .menuItem {
+      height: 30px;
+      list-style: none;
+      position: relative;
+      a{
+        color: var(--mantle-off-white);
+        line-height: 30px;
+      }
+      .subMenu {
+        text-transform: none;
+        background: var(--card-dark);
+        border: 2px solid var(--line-2);
+        border-radius: 10px;
+        height: fit-content;
+        width: 180px;
+        position: absolute;
+        left: 0px;
+        top: 55px;
+        transform: translateX(-32px);
+        z-index: 99;
+        padding: 12px 24px;
+        opacity: 0;
+        visibility: hidden;
+        transition: all 0.3s ease;
+        cursor: auto;
+        &::before {
+          content: '';
+          border-left: 9px solid transparent;
+          border-right: 9px solid transparent;
+          border-bottom: 9px solid var(--card-dark);
+          position: absolute;
+          top: -11px;
+          left: 30px;
+        }
+        .subMenuList {
+          margin: 4px;
+          .subMenuItem {
+            padding: 12px 6px !important;
+            border-bottom: 2px solid #383838;
+            cursor: pointer;
+            .subMenuItemLink {
+              gap: 12px;
+              .subMenuItemLabel {
+                @include setFont(var(--font-type-2), normal, 600, 16px, 19px, var(--mantle-off-white));
+                text-transform: capitalize;
+                @media (max-width: 992px) {
+                  font-size: 14px;
+                }
+              }
+            }
+            &:last-child {
+              border: none;
+            }
+          }
+        }
+        @media (max-width: 992px) {
+          width: 200px;
+          padding: 12px 12px;
+        }
+      }
+      &:hover {
+        .subMenu {
+          top: 41px;
+          opacity: 1;
+          visibility: visible;
+        }
+      }
+    }
+  }
+}
+
+// Tooltip
+.tooltip-inner {
+  background: var(--card-dark);
+  border:2px solid var(--line-2);
+}
+.bs-tooltip-auto[data-popper-placement^=top] .tooltip-arrow::before, .bs-tooltip-top .tooltip-arrow::before{
+  border-top-color: var(--line-2);
+}
+
+// Common Error
+.commonError{
+  @include setFont(var(--font-type-2), normal, 400, 14px, 17px, var(--error));
+  position: relative;
+}
+
+// Pagination Button
+.paginationButton{
+  @include setFont(var(--font-type-2), normal, 400, 14px, 17px, var(--default));
+  cursor: pointer;
+  &.small{
+    i{
+      font-size: 14px;
+    }
+  }
+}
+
+.gasFeesLabel{
+  @include setFont(var(--font-type-2), normal, 700, 14px, 17px, var(--inactive-gray));
+}
+#gasPriceToggleButton{
+  .toggleOption{
+    color: var(--mantle-off-white);
+    &:hover{
+      color: var(--card-color);
+      .gasPricePriority{
+        font-weight: bold;
+      }
+      .gasCharges,.gasChargesPrice{
+        color: var(--card-color);
+      }
+    }
+    &.active{
+      color: var(--card-color);
+      .gasPricePriority{
+        font-weight: bold;
+      }
+      .gasCharges,.gasChargesPrice{
+        color: var(--card-color);
+      }
+    }
+    .gasPricePriority{
+      font-size: 14px;
+      font-weight: bold;
+      line-height: 22px;
+    }
+    .gasCharges,.gasChargesPrice{
+      font-size: 12px;
+      font-weight: 400;
+      color: var(--gray);
+      line-height: 14px;
+    }
+  }
+}
+
+// Horizontal Switcher
+.nav{
+  --bs-nav-link-padding-x: 1rem;
+  --bs-nav-link-padding-y: 0rem;
+  --bs-nav-link-color: var(--gray);
+  --bs-nav-link-hover-color: var(--gray);
+  --bs-nav-link-disabled-color: var(--disable);
+  flex-wrap: nowrap;
+  overflow-x: auto;
+
+  &.nav-tabs{
+    --bs-nav-tabs-border-width: 0px;
+    --bs-nav-tabs-border-color: transparent;
+    --bs-nav-tabs-border-radius: 0rem;
+    --bs-nav-tabs-link-hover-border-color: transparent;
+    --bs-nav-tabs-link-active-color: var(--default);
+    --bs-nav-tabs-link-active-bg: transparent;
+    --bs-nav-tabs-link-active-border-color: transparent;
+    border-bottom: none;
+
+    .nav-link{
+      @include setFont(var(--font-type-1), normal, 500, 14px, 17px, var(--gray));
+      &.active{
+        @include setFont(var(--font-type-1), normal, 700, 14px, 17px, var(--default));
+      }
+      &:first-child{
+        padding-left: 0px;
+      }
+    }
+  }
+  &::-webkit-scrollbar{
+    display: none;
+  }
+}
+.tab-content{
+  .tab-pane{
+    &.fade{
+      transition-duration: 0.2s;
+      transition-timing-function: ease-in-out;
+    }
+  }
+}
+// Snackbar
+#toastContainer{
+  position: fixed !important;
+  bottom: 30px !important;
+  right: 15px !important;
+  margin: 0px !important;
+  .toast{
+    border-radius: 10px;
+    background: var(--popup-bg);
+    box-shadow: 0px 0px 20px rgba(0, 0, 0, 0.25) !important;
+    border:none;
+    overflow: hidden;
+    .toast-header{
+      background: var(--popup-bg);
+      padding: 20px 20px 20px 28px;
+      border-bottom: none;
+      position: relative;
+      .status-icon{
+        &.text-success{
+          color: var(--connected) !important;
+        }
+        &.text-danger{
+          color: var(--error) !important;
+        }
+        &.text-warning{
+          color: var(--default) !important;
+        }
+        &.text-info{
+          color: var(--icon-white) !important;
+        }
+      }
+      .status-icon{
+        display: flex !important;
+        align-items: center;
+        justify-content: center;
+        height: 40px;
+        min-width: 40px;
+        background-color: var(--card-dark);
+        font-size: 20px;
+        border-radius: 50%;
+        z-index: 99;
+      }
+      .toast-title{
+        @include setFont(var(--font-type-2), normal, 700, 14px, 17px, var(--mantle-off-white));
+        z-index: 99;
+      }
+      .toast-body{
+        @include setFont(var(--font-type-2), normal, 400, 14px, 17px, var(--text-medium));
+        padding: 0px;
+        z-index: 99;
+      }
+      .snackbarProgress {
+        position: absolute;
+        bottom: 0;
+        left: 0;
+        height: 100%;
+        width: 100%;
+        background-color: var(--popup-bg);
+        z-index: 1;
+        &:before {
+          content: "";
+          position: absolute;
+          bottom: 0;
+          left: 0%;
+          height: 100%;
+          width: 100%;
+          background-color: var(--line-2);
+          display: none;
+        }
+      }
+    }
+    &.show{
+      .snackbarProgress {
+        &:before {
+          animation: progress 3s linear forwards;
+          display: block;
+          @keyframes progress {
+            100% {
+              left: 100%;
+            }
+          }
+        }
+      }
+    }
+  }
+}
+.sendCoinAmountField{
+  position: relative;
+  .availableBalance{
+    position: absolute;
+    right: 0;
+    @include setFont(var(--font-type-1), normal, 500, 14px, 17px, var(--default));
+    cursor: pointer;
+  }
+}
+
+// common Notification popup
+.right-menu .links li.menuItem .notificationPopup {
+  text-transform: none;
+  width: 396px;
+  position: absolute;
+  left: -260px;
+  top: 90px;
+  transform: translateX(-71px);
+  z-index: 9999;
+  opacity: 0;
+  visibility: hidden;
+  transition: all 0.3s ease;
+  cursor: auto;
+
+  &.active {
+    top: 70px;
+    opacity: 1;
+    visibility: visible;
+    //transition: all 0.3s ease;
+  }
+
+  .notificationPopupContainer {
+    background: var(--popup-bg);
+    border: 2px solid var(--popup-stroke);
+    border-radius: 0 0 20px 20px;
+    padding: 32px;
+    position: relative;
+    overflow: hidden;
+
+    .separator {
+      height: 2px;
+      width: 100%;
+      background-color: #383838;
+      margin: 16px 0px;
+    }
+
+    .headerContainer {
+      line-height: 22px;
+      .title{
+        @include setFont(var(--font-type-2), normal, 600, 18px, 22px, var(--mantle-off-white));
+      }
+      .titleLink{
+        @include setFont(var(--font-type-1), normal, 700, 14px, 17px, var(--dark));
+        text-transform: capitalize;
+        cursor: pointer;
+      }
+    }
+
+    .emailContainer{
+      width: 100%;
+      line-height: 20px;
+      .emailInputField{
+        .emailNotificationLabel{
+          @include setFont(var(--font-type-2), normal, 700, 14px, 17px, var(--gray));
+          text-transform: capitalize;
+        }
+        input[type="text"]{
+          @include setFont(var(--font-type-2), normal, 400, 14px, 17px, var(--mantle-off-white));
+          height: 36px;
+          box-sizing: border-box;
+          display: block;
+          width: 100%;
+          border: 1px solid var(--inactive-gray);
+          padding: calc(var(--size-bezel) * 2) 12px;
+          background: transparent;
+          border-radius: var(--size-radius);
+          letter-spacing: 1px;
+          outline: none;
+          margin-top: 12px;
+          &:focus{
+            border-color: var(--dark);
+          }
+          &:not(:focus)
+          {
+            color: var(--inactive-gray);
+            border-color: var(--gray) !important;
+          }
+          &.errorField{
+            border: 1px solid var(--error) !important;
+          }
+        }
+        .emailNotificationButton{
+          @include setFont(var(--font-type-1), normal, 700, 14px, 17px, var(--dark));
+          text-align: right;
+          text-transform: capitalize;
+          margin-top: 12px;
+        }
+      }
+    }
+    .notificationList{
+      .notificationListTitle{
+        @include setFont(var(--font-type-2), normal, 700, 14px, 17px, var(--dark));
+        text-transform: capitalize;
+        margin-bottom: 12px;
+      }
+      .list{
+        .singleNotification{
+          .notificationIcon{
+            height: 40px;
+            width: 40px;
+            aspect-ratio: 1;
+            border-radius: 50%;
+            background-color: var(--default);
+            cursor: pointer;
+            i{
+              color:var(--card-dark);
+            }
+            &:hover{
+              background-color: var(--disable-yellow);
+            }
+            &.active{
+              background-color: var(--default);
+              i{
+                color:var(--mantle-off-white);
+              }
+            }
+          }
+          .notificationDetail{
+            cursor: pointer;
+            .title{
+              @include setFont(var(--font-type-2), normal, 700, 14px, 17px, var(--default));
+              text-transform: capitalize;
+              word-break: break-word;
+              &.clickable{
+                cursor: pointer;
+              }
+            }
+            .description{
+              @include setFont(var(--font-type-2), normal, 400, 14px, 17px, var(--text-medium));
+              word-break: break-word;
+            }
+            .dateTime{
+              @include setFont(var(--font-type-2), normal, 500, 12px, 14px, var(--disable));
+            }
+            &.read{
+              .notificationIcon{
+                background-color: var(--card-dark);
+                i{
+                  color:var(--mantle-off-white);
+                }
+              }
+            }
+          }
+          &.clickable{
+            cursor: pointer;
+          }
+        }
+      }
+
+    }
+    .loadOlderNotificationButton{
+      @include setFont(var(--font-type-1), normal, 700, 14px, 17px, var(--dark));
+      text-align: right;
+      text-transform: capitalize;
+      cursor: pointer;
+    }
+  }
+}
+// Common Upload File
+.uploadFileContainer{
+  width: 100%;
+  height: 100%;
+  .uploadFileLabel{
+    @include setFont(var(--font-type-2), normal, 600, 18px, 34px, var(--inactive-gray));
+  }
+  .uploadForm{
+    border: 1px dashed var(--gray);
+    border-radius: 10px;
+    min-height: 396px;
+    max-height: 400px;
+    height: 100%;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    display: flex;
+    position: relative;
+    .uploadBox{
+      .uploadIcon{
+        font-size: 40px;
+      }
+      .dropBox{
+        @include setFont(var(--font-type-2), normal, 600, 20px, 32px, var(--mantle-off-white));
+        display: block;
+        margin-bottom: 8px;
+      }
+      .centerText{
+        @include setFont(var(--font-type-2), normal, 500, 12px, 17px, var(--text-medium));
+        display: block;
+        margin-bottom: 8px;
+      }
+    }
+    .uploader{
+      display: none;
+      .fileName{
+        @include setFont(var(--font-type-2), normal, 700, 14px, 17px, var(--inactive-gray));
+        word-break: break-word;
+      }
+    }
+    .uploadCompletionMessage{
+      @include setFont(var(--font-type-2), normal, 700, 14px, 17px, var(--inactive-gray));
+      word-break: break-word;
+      display: flex;
+      justify-content: center;
+    }
+  }
+  .modalInfoBlock{
+    z-index: 999;
+    height: 100%;
+  }
+  .previewImageContainer{
+    height: 250px;
+    width: 250px;
+    img{
+      display: block;
+      max-width: 100%;
+      max-height: 100%;
+      min-width: 100%;
+      min-height: 100%;
+      margin: auto;
+      aspect-ratio: 1/1;
+      object-fit: cover;
+      border-radius: 10px;
+    }
+  }
+  .progressContainer{
+    height: 100%;
+    width: 100%;
+    border-radius: 10px;
+    overflow: hidden;
+    z-index: 99;
+    .progressBar{
+      height: 100%;
+      width: 0%;
+      background-color: var(--card-dark);
+    }
+  }
+  .progressBarMessage{
+    display: none;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background-color: var(--background-dark);
+    border-radius: 36px;
+    padding: 12px;
+    @include setFont(var(--font-type-2), normal, 400, 14px, 17px, var(--mantle-off-white));
+    white-space: nowrap;
+    z-index: 999;
+    .progressSpinner {
+      width: 36px;
+      height: 36px;
+      border-radius: 50%;
+      border-top: 3px solid var(--dark);
+      border-right: 3px solid transparent;
+      -webkit-animation: rotation 1s linear infinite;
+      animation: rotation 1s linear infinite;
+      @-webkit-keyframes rotation {
+        0% {
+          transform: rotate(0deg);
+        }
+        100% {
+          transform: rotate(360deg);
+        }
+      }
+    }
+  }
+}
+
+// Common Tertiary Button
+.tertiaryButton{
+  @include setFont(var(--font-type-2), normal, 400, 14px, 17px, var(--inactive-gray));
+  background: radial-gradient(50% 50% at 50% 50%, #FFC640 47.4%, #F2AF13 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  text-fill-color: transparent;
+  cursor: pointer;
+  display: inline-block;
+}
+
+#notificationList{
+  height: 300px;
+  overflow-y: auto;
+  padding-right: 10px;
+}
+
+// New Feature Icon
+.newFeatureIcon{
+  position: absolute;
+  right: 0;
+  top: 10px;
+  @include setFont(var(--font-type-2), normal, 400, 10px, 14px, var(--header-bg));
+  padding: 2px 4px;
+  background-color: var(--default);
+  border-radius: 5px;
+}
+
+// Hide Modal scrollbar
+body.modal-open{
+  padding-right: 0px !important;
+}
+#commonModal{
+  padding-right: 0px !important;
+  #modalSpinner{
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    padding: 32px 32px 32px 0px;
+    background-color: #21211E;
+    border-radius: 10px;
+    border: 2px solid #282826;
+    height: fit-content;
+    width: 100%;
+    display: none;
+    }
+    .spinner{
+      position: relative;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      width: 48px;
+      height: 48px;
+      border-radius: 50%;
+      display: inline-block;
+      border-top: 3px solid var(--dark);
+      border-right: 3px solid transparent;
+      -webkit-animation: rotation 1s linear infinite;
+      animation: rotation 1s linear infinite;
+      @-webkit-keyframes rotation {
+        0% {
+          transform: rotate(0deg);
+        }
+        100% {
+          transform: rotate(360deg);
+        }
+    }
+  }
+}
+#commonModal::-webkit-scrollbar{
+  display: none;
+}
+
+// Notification count
+#totalUnreadNotification{
+  display: none;
+  background-color: var(--default);
+  position: absolute;
+  left: calc(100% - 12px);
+  top: 10px;
+  @include setFont(var(--font-type-2), normal, 400, 10px, 14px, var(--header-bg));
+  padding: 2px 4px;
+  border-radius: 5px;
+}
+
+// Collection NFTs on Sale
+.swiper-slide {
+  background-position: center;
+  background-size: cover;
+  width: 220px !important;
+  height: 300px !important;
+  box-shadow: 0 15px 50px rgba(0,0,0,.2);
+  border-radius: 10px;
+  position: relative;
+  overflow: hidden;
+}
+#collectionSaleNFTs{
+  position: relative;
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+#collectionSaleNFTs .swiper-container
+{
+  width: 100%;
+  padding-top: 20px;
+  padding-bottom: 20px;
+  overflow: hidden;
+}
+.swiper-horizontal>.swiper-pagination-bullets, .swiper-pagination-bullets.swiper-pagination-horizontal, .swiper-pagination-custom, .swiper-pagination-fraction{
+  height: 40px;
+}
+#collectionSaleNFTs .swiper-slide img{
+  display: block;
+  width: 100%;
+}
+#collectionSaleNFTs .swiper-slide .imageContainer{
+  height: calc(100% / 1);
+  display: flex;
+  background-color: var(--card-dark);
+  overflow: hidden;
+  border-radius: 10px;
+}
+#collectionSaleNFTs .swiper-slide img{
+  display: block;
+  max-width: 100%;
+  max-height: 100%;
+  min-width: 100%;
+  min-height: 100%;
+  margin: auto;
+  object-fit: contain;
+  aspect-ratio: 1/1;
+}
+#collectionSaleNFTs .swiper-3d .swiper-slide-shadow-left,
+#collectionSaleNFTs .swiper-3d .swiper-slide-shadow-right
+{
+  background-image: none !important;
+}
+#collectionSaleNFTs .swiper-button-next img,
+#collectionSaleNFTs .swiper-button-prev img{
+  width: 20px;
+}
+#collectionSaleNFTs .swiper-button-next,
+#collectionSaleNFTs .swiper-button-prev{
+  margin: -35px 25px;
+  z-index: 9999;
+}
+#collectionSaleNFTs .swiper-button-next::after,
+#collectionSaleNFTs .swiper-button-prev::after{
+  content: '';
+}
+.NFTCard{
+  background-position: center;
+  background-size: cover;
+  width: 220px !important;
+  height: 300px !important;
+  box-shadow: 0 15px 50px rgba(0,0,0,.2);
+  border-radius: 10px;
+  position: relative;
+  overflow: hidden;
+  margin: 20px 0px;
+  .imageContainer{
+    height: calc(100% / 1);
+    display: flex;
+    background-color: var(--card-dark);
+    overflow: hidden;
+    border-radius: 10px;
+    img{
+      display: block;
+      max-width: 100%;
+      max-height: 100%;
+      min-width: 100%;
+      min-height: 100%;
+      margin: auto;
+      object-fit: contain;
+      aspect-ratio: 1/1;
+    }
+  }
+}
+
+// Center container header
+.centerCardHeader {
+  @include setFont(var(--font-type-1), normal, 700, 14px, 17px, var(--default));
+}
+
+// Section Banner
+.bannerContainer{
+  height: 300px;
+  width: 100%;
+  background-color: var(--card-dark);
+  border-radius: 20px;
+  position: relative;
+  top: -30px;
+  overflow: hidden;
+  &::before{
+    content: '';
+    position: absolute;
+    height: 100%;
+    width: 100%;
+    background: conic-gradient(from 267.15deg at 77.48% 100%, rgba(0, 0, 0, 0.119658) -156.36deg, #000000 14.1deg, rgba(0, 0, 0, 0) 19.22deg, rgba(0, 0, 0, 0.119658) 203.64deg, #000000 374.1deg);
+    opacity: 0.6;
+  }
+  img{
+    height: 100%;
+    width: 100%;
+    object-fit: cover;
+    object-position: center;
+  }
+  .messageContainer{
+    position: absolute;
+    bottom: 20px;
+    left: 24px;
+    z-index: 99;
+    .header{
+      @include setFont(var(--font-type-1), normal, 600, 20px, 24px, var(--mantle-off-white));
+      text-transform: capitalize;
+      margin-bottom: 12px;
+    }
+    .subHeader{
+      @include setFont(var(--font-type-2), normal, 400, 14px, 17px, var(--mantle-off-white));
+    }
+  }
+}
+
+// Common NFT Card
+.singleNFTCard{
+  .card{
+    .nft-detail{
+      .nft-creator-detail{
+        .creator-profile{
+          height: 34px;
+          width: 34px;
+          aspect-ratio: 1;
+          border-radius: 50%;
+          overflow: hidden;
+          img{
+            height: 100%;
+            width: 100%;
+          }
+        }
+      }
+      .nftCardSeparator{
+        height: 2px;
+        width: calc(100% + 32px);
+        background-color: #21211E;
+        margin: 16px -16px 12px -16px;
+      }
+    }
+    .fractionelisedBadge{
+      position: relative;
+      .badgeContent{
+        background-color: var(--popup-bg);
+        border: 1px solid var(--default);
+        padding: 4px 8px;
+        border-radius: 8px;
+        display: flex;
+        align-items: center;
+        gap:6px;
+        position: absolute;
+        left: 16px;
+        top: 16px;
+        z-index: 99;
+        i{
+          line-height: 12px;
+          transform: rotate(-15deg);
+        }
+        span{
+          @include setFont(var(--font-type-2), normal, 400, 12px, 12px, var(--mantle-off-white));
+        }
+      }
+    }
+  }
+}
+
+// Skeleton Loading
+.skeletonLoadContainer{
+  height: 100%;
+  width: 100%;
+  position: relative;
+  z-index: 1;
+  &::before{
+    content: '';
+    position: absolute;
+    height: 100%;
+    width: 100%;
+    transform: translateX(-100%);
+    background: linear-gradient(90deg, transparent, rgba(40, 40, 38, 0.4), transparent);
+    animation: anim 1.2s infinite;
+  }
+  &.hide::before{
+    display:none;
+  }
+  @keyframes anim {
+    100% {
+      transform: translateX(100%);
+    }
+  }
+  img{
+    visibility: hidden;
+    &.show{
+      visibility: visible;
+    }
+  }
+}
+
+// Invoice
+#invoice{
+  .tableHeading{
+    @include setFont(var(--font-type-2), normal, 600, 16px, 19px, var(--text-medium));
+    text-transform: capitalize;
+  }
+  .card{
+    background: var(--card-dark);
+    border-radius: 10px;
+    .table {
+      .tableTitle{
+        @include setFont(var(--font-type-2), normal, 700, 14px, 17px, var(--mantle-off-white));
+        text-transform: capitalize;
+      }
+      .tableLabel{
+        @include setFont(var(--font-type-2), normal, 700, 14px, 17px, var(--gray));
+        text-transform: capitalize;
+      }
+      .tableValue{
+        @include setFont(var(--font-type-2), normal, 400, 14px, 17px, var(--gray));
+        text-transform: capitalize;
+      }
+      .tableValueBig{
+        @include setFont(var(--font-type-2), normal, 400, 18px, 22px, var(--gray));
+        text-transform: capitalize;
+      }
+      .tableSeparator{
+        display: block;
+        width: 100%;
+        height: 1px;
+        background-color: var(--line);
+        margin: 8px 0px;
+      }
+    }
+  }
+}
+
+#invoice{
+  .tableHeading{
+    @include setFont(var(--font-type-2), normal, 600, 16px, 19px, var(--text-medium));
+    text-transform: capitalize;
+  }
+  .card{
+    background: var(--card-dark);
+    border-radius: 10px;
+    .table {
+      .tableTitle{
+        @include setFont(var(--font-type-2), normal, 700, 14px, 17px, var(--mantle-off-white));
+        text-transform: capitalize;
+      }
+      .tableLabel{
+        @include setFont(var(--font-type-2), normal, 700, 14px, 17px, var(--gray));
+        text-transform: capitalize;
+      }
+      .tableValue{
+        @include setFont(var(--font-type-2), normal, 400, 14px, 17px, var(--gray));
+        text-transform: capitalize;
+      }
+      .tableValueBig{
+        @include setFont(var(--font-type-2), normal, 400, 18px, 22px, var(--gray));
+        text-transform: capitalize;
+      }
+      .tableSeparator{
+        display: block;
+        width: 100%;
+        height: 1px;
+        background-color: var(--line);
+        margin: 8px 0px;
+      }
+      #bondingAmountContainer{
+        display: none;
+      }
+    }
+  }
+}
+
+// NFT Reveal
+#nftRevealModal{
+  padding-right: 0px !important;
+  backdrop-filter: blur(5px);
+  .modal-dialog{
+    width: 100%;
+    max-width: 100%;
+    min-height: 100%;
+    height: 100%;
+    display: block;
+    margin: 0px;
+    .modal-content {
+      padding: 0px;
+      background-color: transparent;
+      border-radius: 0px;
+      border: none;
+      height: fit-content;
+      #nftRevealContainer{
+        width: 100%;
+        position: absolute;
+        z-index: 99999;
+        top:0;
+        left: 0;
+        .gifContainer{
+          height: 100vh;
+          width: 100vw;
+          position: absolute;
+          top:0;
+          left: 0;
+          overflow: hidden;
+          #gifImage {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%,-50%);
+            width: 100%;
+            max-width: 1000px;
+            display: none;
+            object-fit: contain;
+            z-index: 999999;
+          }
+          .backRipple{
+            background: #ffc640;
+            width: 100px;
+            height: 100px;
+            border-radius: 50%;
+            box-shadow: 0 0 20px #ffc640, 0 0 30px #ffc640, 0 0 40px #ffc640, 0 0 50px #ffc640, 0 0 60px #ffc640;
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%,-50%) scale(0);
+            &.anim {
+              animation: animted 9s linear forwards;
+              animation-delay: 1s;
+            }
+            @keyframes animted {
+              0% {
+                transform: translate(-50%,-50%) scale(0);
+                opacity: 1;
+              }
+              100% {
+                transform: translate(-50%,-50%) scale(20);
+                opacity: 0;
+              }
+            }
+          }
+        }
+        .btn-close{
+          z-index: 999999;
+          position: fixed;
+          right: 32px;
+          top: 32px;
+        }
+        .nftRevealBackDrop {
+          width: 100vw;
+          height: 100vh;
+          position: fixed;
+          top: 0;
+          left: 0;
+          align-items: center;
+          justify-content: center;
+          background-color: rgba(0, 0, 0, 0.6);
+          z-index: -1;
+          backdrop-filter: blur(5px);
+        }
+        #cards_container {
+          height: 100vh;
+          overflow-y: auto;
+          opacity: 0;
+          &.anim {
+            animation: animOp 3s linear forwards;
+          }
+          @keyframes animOp {
+            0% {
+              opacity: 0;
+            }
+            100% {
+              opacity: 1;
+            }
+          }
+          .cards {
+            margin: 20px auto;
+            height: 100%;
+            max-width: 1500px;
+            z-index: 1;
+            transform: translate3d(0.1px, 0.1px, 0.1px);
+            display: grid;
+            transform-style: preserve-3d;
+            position: relative;
+            grid-template-columns: repeat(3, 340px);
+            grid-column-gap: 20px;
+            grid-row-gap: 20px;
+            .cardd{
+              height: 340px;
+              transform-style: preserve-3d;
+              z-index: 1;
+              position: relative;
+              opacity: 0;
+              .cartTranslator {
+                position: absolute;
+                perspective: 600px;
+                transition: transform 1s ease;
+                will-change: transform, filter;
+                transform-origin: center;
+                .cardRotator {
+                  width: 340px;
+                  height: 340px;
+                  background-color: var(--popup-bg);
+                  aspect-ratio: 1;
+                  position: relative;
+                  z-index: 10;
+                  touch-action: none;
+                  border-radius: 10px;
+                  transition: transform 0.1s ease-out;
+                  will-change: transform, filter;
+                  transform-origin: center;
+                  &.fliped {
+                    animation: flip 1s ease forwards;
+                  }
+                  @keyframes flip {
+                    0% {
+                      transform: rotateY(0deg) scale(1);
+                    }
+                    100% {
+                      transform: rotateY(360deg) scale(1.4);
+                    }
+                  }
+                  img {
+                    width: 100%;
+                    height: 100%;
+                    border-radius: 10px;
+                  }
+                  @media (min-width: 1500px){
+                    width: 400px;
+                    height: 400px;
+                  }
+                  @media (max-width: 1200px){
+                    width: 340px;
+                    height: 340px;
+                  }
+                  @media (max-width: 992px){
+                    width: 140px;
+                    height: 140px;
+                  }
+                }
+              }
+              @media (min-width: 1500px){
+                height: 400px;
+              }
+              @media (max-width: 1200px){
+                height: 340px;
+              }
+              @media (max-width: 992px){
+                height: 140px;
+              }
+            }
+            @media (min-width: 1500px){
+              grid-template-columns: repeat(3, 400px);
+            }
+            @media (max-width: 1200px){
+                grid-template-columns: repeat(2, 340px);
+            }
+            @media (max-width: 992px){
+              grid-template-columns: repeat(2, 140px);
+            }
+          }
+          &::-webkit-scrollbar{
+            display: none;
+          }
+        }
+        .middlePoint {
+          width: 10px;
+          height: 10px;
+          background-color: transparent;
+          position: fixed;
+          top: 50%;
+          left: 50%;
+          transform: translate(-50%, -50%);
+          z-index: 99999;
+        }
+      }
+    }
+  }
+  &::-webkit-scrollbar{
+    display: none;
+  }
+}
+
+// Audio NFT Card
+.audioNftContainer{
+  position: absolute;
+  bottom: 0;
+  width: 100%;
+  .audioPlayer{
+    display: none;
+  }
+  .controls {
+    margin: 0 12px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 4px;
+
+    .playButtonContainer{
+      cursor: pointer;
+      z-index: 2;
+      width: 36px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background-color: rgba(44,44,44,0.4);
+      height: 36px;
+      padding: 9px;
+      border-radius: 18px;
+      position: relative;
+      transition: all 0.3s;
+      .playButton {
+        overflow: unset;
+        i {
+          color: white;
+        }
+      }
+      .timelineContainer {
+        align-self: center;
+        flex: 1 1 0%;
+        width: 100%;
+        display: flex;
+        align-items: center;
+        gap: 4px;
+        .timeline {
+          background: white;
+          width: 100%;
+          height: 4px;
+          position: relative;
+          cursor: pointer;
+          border-radius: 2px;
+          overflow: hidden;
+          .progress {
+            background: var(--default);
+            width: 0%;
+            height: 4px;
+            transition: 0.25s;
+          }
+        }
+        .time{
+          overflow: unset;
+          display: flex;
+          @include setFont(var(--font-type-2), normal, 400, 12px, 14px, var(--mantle-off-white));
+        }
+      }
+      &.withTimeline {
+        &:hover {
+          background-color: rgba(44, 44, 44, 1);
+          width: 100%;
+          gap: 4px;
+        }
+      }
+      &:hover {
+        background-color: rgba(44, 44, 44, 1);
+      }
+    }
+
+    .volumeContainer {
+      cursor: pointer;
+      z-index: 2;
+      width: 36px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background-color: rgba(44,44,44,0.4);
+      height: 36px;
+      padding: 9px;
+      border-radius: 18px;
+      position: relative;
+      transition: all 0.3s;
+      .volumeButton{
+        overflow: unset;
+        i{
+          color: white;
+        }
+      }
+      .volumeSlider {
+        width: 0%;
+        height: 4px;
+        background: white;
+        border-radius: 2px;
+        overflow: hidden;
+        .volumePercentage {
+          background: var(--default);
+          height: 100%;
+          width: 100%;
+        }
+      }
+      &:hover{
+        background-color: rgba(44,44,44,1);
+        width: 120px;
+        gap: 4px;
+        .volumeSlider {
+          width: 100%;
+        }
+      }
+    }
+  }
+}
+// Collection Cover
+.coverWithBg{
+  min-width: 320px;
+  min-height: 200px;
+  position: relative;
+  display: flex;
+  justify-content: center;
+  overflow: hidden;
+  height: 100%;
+  img{
+    max-width: 100%;
+    width: auto !important;
+    display: block;
+    max-height: 300px;
+    &.bg{
+      filter: blur(10px);
+      position: absolute;
+      left: 0;
+      top: 0;
+      width: 120% !important;
+      height: 120%;
+      object-fit: fill;
+    }
+    &.main{
+      height: auto !important;
+      //position: absolute;
+      //left: 0;
+      //top: 0;
+      //transform: translate(-50%, -50%);
+    }
+  }
+}

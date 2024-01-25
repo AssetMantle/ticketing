@@ -1,0 +1,28 @@
+@(collection: master.Collection)(implicit requestHeader: RequestHeader, messagesProvider: MessagesProvider)
+
+<div class="sticky-top item-sticky">
+    <div class="card leftInfoCard">
+        <div class="title">@collection.name</div>
+        <div class="description">
+            @collection.detail.description
+        </div>
+        <div class="separator"></div>
+        <div class="d-flex gap-3 gap-sm-4 gap-md-2 gap-lg-2 align-items-center w-100">
+            @if(collection.getWebsite.isDefined) {
+                <a href="@collection.getWebsite.get" target="_blank">
+                    <i class="bi bi-globe2 iconDefault icon"></i>
+                </a>
+            }
+            @if(collection.getTwitter.isDefined) {
+                <a href="@collection.getTwitter.getOrElse("#")" target="_blank">
+                    <img src="@routes.Assets.versioned("images/icon/twitterYellow.png")" class="icon"/>
+                </a>
+            }
+            @if(collection.getInstagram.isDefined) {
+                <a href="@collection.getInstagram.getOrElse("#")" target="_blank">
+                    <i class="bi bi-instagram iconDefault icon"></i>
+                </a>
+            }
+        </div>
+    </div>
+</div>

@@ -1,0 +1,18 @@
+@(heading: String, subHeading: String, subHeadingParameters: String*)(implicit requestHeader: RequestHeader, messagesProvider: MessagesProvider)
+
+<div class="header-success">
+    <div class="d-flex">
+        <div class="text-center form-success-icon">
+            <img class="checkmark" src="@routes.Assets.versioned("images/icon/greenTick.png")" height="100px" width="100px" style="margin-left: 20px;"/>
+        </div>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close" onclick="closeModal()">
+                    &times;
+        </button>
+    </div>
+    <div class="form-body">
+        <div class="mt-4 text-center">
+            <div class="form-success-message-heading">@Messages(heading)</div>
+            <div class="mt-2 form-success-message-sub-text">@Messages(subHeading, subHeadingParameters)</div>
+        </div>
+    </div>
+</div>

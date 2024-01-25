@@ -1,0 +1,17 @@
+@import controllers.actions.LoginState
+@import models.master.Sale
+
+@(sale: Option[Sale])(implicit requestHeader: RequestHeader, messagesProvider: MessagesProvider, optionalLoginState: Option[LoginState])
+
+<div class="sticky-top item-sticky">
+    <div class="card rightInfoCard">
+        <div class="d-flex flex-column gap-1 mt-3">
+            <div class="analysisTitle">@Messages(constants.View.TOTAL_NFTS)</div>
+            <div class="analysisValue">@utilities.NumericOperation.formatNumber(sale.fold(BigInt(0))(_.numberOfNFTs))</div>
+        </div>
+        <div class="d-flex flex-column gap-1 mt-3">
+            <div class="analysisTitle">@Messages(constants.View.COLLECTION_TOTAL_NFT_SOLD)</div>
+            <div class="analysisValue">@utilities.NumericOperation.formatNumber(sale.fold(BigInt(0))(_.totalSold))</div>
+        </div>
+    </div>
+</div>

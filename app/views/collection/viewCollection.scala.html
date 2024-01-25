@@ -1,0 +1,10 @@
+@import controllers.actions.LoginState
+@import models.master.Collection
+
+@(collection: Collection)(implicit requestHeader: RequestHeader, messagesProvider: MessagesProvider, loginState: Option[LoginState])
+
+@views.html.base.common(constants.View.COLLECTION)
+
+<script>
+        viewCollection('@collection.id');
+</script>

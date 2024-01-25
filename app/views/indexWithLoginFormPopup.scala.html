@@ -1,0 +1,6 @@
+@import controllers.actions.LoginState
+
+@(callbackUrl: String)(implicit requestHeader: RequestHeader, messagesProvider: MessagesProvider, loginState: Option[LoginState] = None)
+@views.html.collection.viewCollections()
+
+<script>getForm(jsRoutes.controllers.AccountController.signInWithCallbackForm('@callbackUrl'))</script>

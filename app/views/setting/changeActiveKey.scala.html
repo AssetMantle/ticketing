@@ -1,0 +1,11 @@
+@import helper._
+@import views.account.companion.ChangeActiveKey
+@import views.html.base.form._
+
+@(changeActiveKeyForm: Form[ChangeActiveKey.Data] = ChangeActiveKey.form, address: String)(implicit requestHeader: RequestHeader, messagesProvider: MessagesProvider)
+
+    @commonForm(constants.Form.CHANGE_ACTIVE_KEY, changeActiveKeyForm) {
+        @CSRF.formField
+        @commonInputText(changeActiveKeyForm, constants.FormField.WALLET_ADDRESS, Symbol("value") -> address, Symbol("readonly") -> true)
+        @commonInputPassword(changeActiveKeyForm, constants.FormField.PASSWORD)
+    }

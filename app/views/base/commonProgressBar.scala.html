@@ -1,0 +1,14 @@
+@(totalSold: BigInt, totalOnSale: BigInt)(implicit requestHeader: RequestHeader, messagesProvider: MessagesProvider)
+
+<div class="mt-3">
+    <div class="analysisTitle">
+        @Messages(constants.View.NFT_SOLD_LABEL, totalSold, totalOnSale)
+    <span class="analysisPercentage"></span>
+    </div>
+    <div class="mintedNftWeightage">
+        <div class="progressBar">
+            <span data-totalNFT="@totalOnSale" data-soldNFT="@totalSold" style="width: 0;"> </span>
+</div>
+</div>
+</div>
+<script>setSoldNFTProgressBar()</script>

@@ -1,0 +1,38 @@
+@import models.master.Whitelist
+@import views.html.base.buttons._
+@import views.html.base.form._
+@import views.profile.whitelist.companion.AcceptOrLeave
+
+@(whitelist: Whitelist, leaveForm: Form[AcceptOrLeave.Data] = AcceptOrLeave.form)(implicit requestHeader: RequestHeader, messagesProvider: MessagesProvider)
+<div class="modal-header mb-0">
+    <h5 class="modal-title" id="staticBackdropLabel">@Messages(constants.View.WHITELIST_LEAVE_TITLE)</h5>
+    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close" onclick="closeModal()">
+                &times;
+    </button>
+</div>
+<div class="whitelistInfo form-address-box">
+    <div class="form-address-box-item">
+        <span class="address-box-label">@Messages(constants.View.WHITELIST_NAME)</span>
+        <span class="address-box-text">
+            <span class="username-data">@whitelist.name</span>
+        </span>
+    </div>
+    <div class="form-address-box-item">
+        <span class="address-box-label">@Messages(constants.View.WHITELIST_DESCRIPTION)</span>
+        <span class="address-box-text">
+            <span class="username-data">@whitelist.description</span>
+        </span>
+    </div>
+    <div class="form-address-box-item">
+        <span class="address-box-label">@Messages(constants.View.WHITELIST_MAX_MEMBERS)</span>
+        <span class="address-box-text">
+            <span class="username-data">@whitelist.maxMembers</span>
+        </span>
+    </div>
+</div>
+<script src="@utilities.PublicResource.getVersionedRoute("javascripts/profile/whitelist.js")"></script>
+<div class="d-flex justify-content-end horizontal-align">
+    @commonForm(constants.Form.LEAVE_WHITELIST, leaveForm, submitDisable = false, showCancel = true, closeButton = false, showSubtitle = false, callBackFunction = JavaScript(s"""updateJoinedWhitelistContainer()""")) {
+        @commonInputText(leaveForm, constants.FormField.WHITELIST_ID, Symbol("value") -> whitelist.id, Symbol("readonly") -> true, Symbol("containerDivClass") -> "hidden")
+    }
+</div>

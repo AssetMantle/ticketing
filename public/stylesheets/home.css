@@ -1,0 +1,190 @@
+/* Opener */
+.intro{
+    position: fixed;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100vh;
+    transition: 1s cubic-bezier(0.74, 0.06, 0.4, 0.92);
+    z-index: 9999;
+}
+.intro .introContainer {
+    width: 100%;
+    height: 100vh;
+    background: var(--card-dark);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.intro .introContainer .box {
+    width: 200px;
+    height: 250px;
+    position: relative;
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+}
+.intro .introContainer .box .title {
+    width: 100%;
+    position: relative;
+    display: flex;
+    align-items: center;
+    height: 50px;
+}
+.intro .introContainer .box .title .block {
+    width: 0%;
+    height: inherit;
+    background: #FFC640;
+    position: absolute;
+    animation: mainBlock 2s cubic-bezier(0.74, 0.06, 0.4, 0.92) forwards;
+    display: flex;
+}
+.intro .introContainer .box .title h1 {
+    font-family: 'Josefin Sans', sans-serif;
+    color: #fff;
+    font-size: 32px;
+    -webkit-animation: mainFadeIn 2s forwards;
+    -o-animation: mainFadeIn 2s forwards;
+    animation: mainFadeIn 2s forwards;
+    animation-delay: 1.6s;
+    opacity: 0;
+    display: flex;
+    align-items: baseline;
+    position: relative;
+}
+.intro .introContainer .box .title h1 span {
+    width: 0px;
+    height: 0px;
+    -webkit-border-radius: 50%;
+    -moz-border-radius: 50%;
+    border-radius: 50%;
+    background: #FFC640;
+    animation: popIn 0.8s cubic-bezier(0.74, 0.06, 0.4, 0.92) forwards;
+    animation-delay: 2s;
+    margin-left: 5px;
+    margin-top: -10px;
+    position: absolute;
+    bottom: 10px;
+    right: -8px;
+}
+.intro .introContainer .box .role {
+    width: 100%;
+    position: relative;
+    display: flex;
+    align-items: center;
+    height: 30px;
+    margin-top: -15px;
+    overflow: hidden;
+}
+.intro .introContainer .box .role p {
+    animation: secFadeIn 0.9s forwards cubic-bezier(0.175, 0.885, 0.32, 1.275);
+    animation-delay: 2.5s;
+    font-weight: 400;
+    font-family: 'Barlow Condensed', sans-serif;
+    color: #ffffff;
+    font-size: 12px;
+    text-transform: uppercase;
+    letter-spacing: 5px;
+    position: absolute;
+    top: -25px;
+    right: 10px;
+}
+@keyframes mainBlock {
+    0% {
+        width: 0%;
+        left: 0;
+    }
+    50% {
+        width: 100%;
+        left: 0;
+    }
+    100% {
+        width: 0;
+        left: 100%;
+    }
+}
+@keyframes secBlock {
+    0% {
+        width: 0%;
+        left: 0;
+    }
+    50% {
+        width: 100%;
+        left: 0;
+    }
+    100% {
+        width: 0;
+        left: 100%;
+    }
+}
+@keyframes mainFadeIn {
+    0% {
+        opacity: 0;
+    }
+    100% {
+        opacity: 1;
+    }
+}
+@keyframes popIn {
+    0% {
+        width: 0px;
+        height: 0px;
+        background: #FFC640;
+        border: 0px solid #ddd;
+        opacity: 0;
+    }
+    50% {
+        width: 10px;
+        height: 10px;
+        background: #FFC640;
+        opacity: 1;
+        bottom: 45px;
+    }
+    65% {
+        width: 7px;
+        height: 7px;
+        bottom: 0px;
+        width: 15px;
+    }
+    80% {
+        width: 10px;
+        height: 10px;
+        bottom: 20px;
+    }
+    100% {
+        width: 7px;
+        height: 7px;
+        background: #FFC640;
+        border: 0px solid #222;
+        bottom: 10px;
+    }
+}
+@keyframes secFadeIn {
+    0% {
+        top: -25px;
+    }
+    50%{
+        top: 10px;
+    }
+
+    100% {
+        top: 5px;
+    }
+}
+html {
+    height: 100vh;
+    overflow-y: scroll;
+    font-family: sans-serif;
+    scroll-snap-points-y: repeat(100vh);
+    scroll-snap-type: y mandatory;
+}
+/* Smooth Scroll */
+.smooth-scroll-section {
+    height: 100vh;
+    scroll-snap-align: start;
+    position: relative;
+}
+.section-footer{
+    padding: 0rem;
+    height: fit-content;
+}
